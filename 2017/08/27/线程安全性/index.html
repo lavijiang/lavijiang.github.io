@@ -6,14 +6,19 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="http://yoursite.com">
-  <title>Archives: 2017 | Blog</title>
+  <title>线程安全性 | Blog</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta property="og:type" content="website">
-<meta property="og:title" content="Blog">
-<meta property="og:url" content="http://yoursite.com/archives/2017/index.html">
+  <meta name="description" content="线程安全的代码核心在于对共享(Shared)和可变(Mutable)状态的访问 共享：变量可以被多个线程同时访问可变：变量的值在生命周期内可以发生变化 线程安全的定义当多个线程访问某个类，不管运行时环境采用何种调度方式或者这些线程如何交替执行，并且在主调代码中不需要额外的同步或协同，这个类都能表现正确的行为。 无状态对象一定线程安全 原子性(atomic)竞态条件 加锁机制内置锁(同步锁、互斥锁)">
+<meta name="keywords" content="concurrency thread">
+<meta property="og:type" content="article">
+<meta property="og:title" content="线程安全性">
+<meta property="og:url" content="http://yoursite.com/2017/08/27/线程安全性/index.html">
 <meta property="og:site_name" content="Blog">
+<meta property="og:description" content="线程安全的代码核心在于对共享(Shared)和可变(Mutable)状态的访问 共享：变量可以被多个线程同时访问可变：变量的值在生命周期内可以发生变化 线程安全的定义当多个线程访问某个类，不管运行时环境采用何种调度方式或者这些线程如何交替执行，并且在主调代码中不需要额外的同步或协同，这个类都能表现正确的行为。 无状态对象一定线程安全 原子性(atomic)竞态条件 加锁机制内置锁(同步锁、互斥锁)">
+<meta property="og:updated_time" content="2017-08-27T08:27:53.233Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Blog">
+<meta name="twitter:title" content="线程安全性">
+<meta name="twitter:description" content="线程安全的代码核心在于对共享(Shared)和可变(Mutable)状态的访问 共享：变量可以被多个线程同时访问可变：变量的值在生命周期内可以发生变化 线程安全的定义当多个线程访问某个类，不管运行时环境采用何种调度方式或者这些线程如何交替执行，并且在主调代码中不需要额外的同步或协同，这个类都能表现正确的行为。 无状态对象一定线程安全 原子性(atomic)竞态条件 加锁机制内置锁(同步锁、互斥锁)">
   
     <link rel="alternative" href="/atom.xml" title="Blog" type="application/atom+xml">
   
@@ -149,36 +154,62 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            
-  
-  
+            <article id="post-线程安全性" class="article article-type-post " itemscope itemprop="blogPost">
+  <div class="article-inner">
     
-    
-      
-      
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/archives/2017" class="archive-year">2017</a>
-        </div>
-        <div class="archives">
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2017/08/27/线程安全性/" class="archive-article-date">
-  	<time datetime="2017-08-27T07:50:58.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-08-27</time>
-</a>
-        </div>
-    	 
+      <header class="article-header">
+        
   
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2017/08/27/线程安全性/">线程安全性</a>
+    <h1 class="article-title" itemprop="name">
+      线程安全性
     </h1>
   
 
-        <div class="article-info info-on-right">
-          
+        
+        <a href="/2017/08/27/线程安全性/" class="archive-article-date">
+  	<time datetime="2017-08-27T07:50:58.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-08-27</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>线程安全的代码核心在于对<strong>共享(Shared)</strong>和<strong>可变(Mutable)</strong>状态的访问</p>
+<p>共享：变量可以被多个线程同时访问<br>可变：变量的值在生命周期内可以发生变化</p>
+<h2 id="线程安全的定义"><a href="#线程安全的定义" class="headerlink" title="线程安全的定义"></a><strong>线程安全的定义</strong></h2><p>当多个线程访问某个类，不管运行时环境采用何种调度方式或者这些线程如何交替执行，并且在主调代码中不需要额外的同步或协同，这个类都能表现正确的行为。</p>
+<p><em>无状态对象一定线程安全</em></p>
+<h2 id="原子性-atomic"><a href="#原子性-atomic" class="headerlink" title="原子性(atomic)"></a><strong>原子性(atomic)</strong></h2><p>竞态条件</p>
+<h2 id="加锁机制"><a href="#加锁机制" class="headerlink" title="加锁机制"></a><strong>加锁机制</strong></h2><p><strong>内置锁(同步锁、互斥锁)</strong>：java提供同步代码块(Synchronized Block)支持原子性，包括锁的对象引用和锁保护的代码块，性能低。<br>&gt;<br>    synchronized(lock){<br>    }</p>
+<p><strong>重入</strong>：内置锁可重入，即线程可以获得它自己持有的锁。实现方法是为每个锁关联一个获取计数值和一个所有者线程。  </p>
+
+      
+
+      
+        <div class="page-reward">
+          <a href="javascript:;" class="page-reward-btn tooltip-top">
+            <div class="tooltip tooltip-east">
+            <span class="tooltip-item">
+              赏
+            </span>
+            <span class="tooltip-content">
+              <span class="tooltip-text">
+                <span class="tooltip-inner">
+                  <p class="reward-p"><i class="icon icon-quo-left"></i>谢谢你请我吃糖果<i class="icon icon-quo-right"></i></p>
+                  <div class="reward-box">
+                    
+                    
+                  </div>
+                </span>
+              </span>
+            </span>
+          </div>
+          </a>
+        </div>
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
 	<div class="article-tag tagcloud">
 		<i class="icon-price-tags icon"></i>
 		<ul class="article-tag-list">
@@ -190,46 +221,104 @@
 		</ul>
 	</div>
 
-          
+      
 
+      
+
+      
+        
+<div class="share-btn share-icons tooltip-left">
+  <div class="tooltip tooltip-east">
+    <span class="tooltip-item">
+      <a href="javascript:;" class="share-sns share-outer">
+        <i class="icon icon-share"></i>
+      </a>
+    </span>
+    <span class="tooltip-content">
+      <div class="share-wrap">
+        <div class="share-icons">
+          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
+            <i class="icon icon-weibo"></i>
+          </a>
+          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
+            <i class="icon icon-weixin"></i>
+          </a>
+          <a class="qq share-sns" href="javascript:;" data-type="qq">
+            <i class="icon icon-qq"></i>
+          </a>
+          <a class="douban share-sns" href="javascript:;" data-type="douban">
+            <i class="icon icon-douban"></i>
+          </a>
+          <a class="qzone share-sns" href="javascript:;" data-type="qzone">
+            <i class="icon icon-qzone"></i>
+          </a>
+          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
+            <i class="icon icon-facebook"></i>
+          </a>
+          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
+            <i class="icon icon-twitter"></i>
+          </a>
+          <a class="google share-sns" href="javascript:;" data-type="google">
+            <i class="icon icon-google"></i>
+          </a>
         </div>
-        <div class="clearfix"></div>
-    </header>
+      </div>
+    </span>
+  </div>
+</div>
+
+<div class="page-modal wx-share js-wx-box">
+    <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <div class="wx-qrcode">
+      <img src="http://s.jiathis.com/qrcode.php?url=http://yoursite.com/2017/08/27/线程安全性/" alt="微信分享二维码">
+    </div>
+</div>
+
+<div class="mask js-mask"></div>
+      
+      <div class="clearfix"></div>
+    </div>
   </div>
 </article>
+
   
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2017/08/27/hello-world/" class="archive-article-date">
-  	<time datetime="2017-08-27T07:02:46.436Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-08-27</time>
-</a>
+<nav id="article-nav">
+  
+  
+    <a href="/2017/08/27/hello-world/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">Hello World</div>
+      <i class="icon-circle-right"></i>
+    </a>
+  
+</nav>
+
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
         </div>
-    	 
+        
+        
+    </div>
+</aside>
+
+
+
   
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2017/08/27/hello-world/">Hello World</a>
-    </h1>
+  
   
 
-        <div class="article-info info-on-right">
-          
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-  
-    </div></section>
   
 
-    
+  
 
 
           </div>
@@ -252,8 +341,8 @@
 	var yiliaConfig = {
 		mathjax: false,
 		isHome: false,
-		isPost: false,
-		isArchive: true,
+		isPost: true,
+		isArchive: false,
 		isTag: false,
 		isCategory: false,
 		open_in_new: false,
