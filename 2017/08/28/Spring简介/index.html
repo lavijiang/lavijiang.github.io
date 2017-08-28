@@ -16,7 +16,7 @@
 <meta property="og:site_name" content="Blog">
 <meta property="og:description" content="Spring优点Spring精髓：基于依赖注入（Dependency Injection）/控制反转（Inversion of Control）核心机制、基于AOP的事务管理、与多种持久层框架的整合、优秀的Web MVC框架。  Ioc容器降低了业务对象替换的复杂性，降低组件之间的耦合 AOP支持将通用任务如安全验证、日志、事务集中处理，更好的复用 ORM和DAO提供了与第三方持久层框架的整合，简">
 <meta property="og:image" content="http://yoursite.com/img/spring.jpg">
-<meta property="og:updated_time" content="2017-08-28T04:26:17.024Z">
+<meta property="og:updated_time" content="2017-08-28T04:50:11.321Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Spring简介">
 <meta name="twitter:description" content="Spring优点Spring精髓：基于依赖注入（Dependency Injection）/控制反转（Inversion of Control）核心机制、基于AOP的事务管理、与多种持久层框架的整合、优秀的Web MVC框架。  Ioc容器降低了业务对象替换的复杂性，降低组件之间的耦合 AOP支持将通用任务如安全验证、日志、事务集中处理，更好的复用 ORM和DAO提供了与第三方持久层框架的整合，简">
@@ -182,7 +182,23 @@
 <li>AOP支持将通用任务如安全验证、日志、事务集中处理，更好的复用</li>
 <li>ORM和DAO提供了与第三方持久层框架的整合，简化了数据库访问</li>
 </ul>
-<h2 id="Spring的整体架构"><a href="#Spring的整体架构" class="headerlink" title="Spring的整体架构"></a><strong>Spring的整体架构</strong></h2><p>Spring是一个分层框架。<br><img src="/img/spring.jpg" alt="image"></p>
+<h2 id="Spring的整体架构"><a href="#Spring的整体架构" class="headerlink" title="Spring的整体架构"></a><strong>Spring的整体架构</strong></h2><p>Spring是一个分层框架。<br><img src="/img/spring.jpg" alt="spring结构图">  </p>
+<p>模块大致为以下几个部分：  </p>
+<ol>
+<li>Core Container<br>核心容器包含<strong>Core、Beans</strong>、Context和Expression Language模块。  <ul>
+<li>Core和Beans是框架的基础部分，提供Ioc和DI特性。  </li>
+<li>BeanFactory提供对Factory模式的实现来消除对单例模式的需要。 </li>
+</ul>
+</li>
+<li>Data Access/Integration<br>包含JDBC、ORM、OXM、JMS和Transaction模块。  <ul>
+<li>JDBC消除冗长的JDBC编码，包含Spring对JDBC数据访问的所有类 </li>
+<li>ORM为对象——关系映射API，如Hibernate、iBatis，进行O/R映射  </li>
+</ul>
+</li>
+<li>Web<br>Web上下文模块为基于Web的应用程序提供了上下文，包含Web、Web-Servlet、Web-Struts和Web-Porlet。</li>
+<li>AOP<br>实现了面向切面编程，定义方法拦截器和切点，从而将逻辑代码分开，降低耦合。  </li>
+<li>Test<br>支持使用JUnit和TestNG对Spring组件进行测试</li>
+</ol>
 
       
 
@@ -417,11 +433,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">concurrency</a>
+                <a href="javascript:void(0)" class="js-tag color2">Spring</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">Spring</a>
+                <a href="javascript:void(0)" class="js-tag color2">concurrency</a>
               </li>
             
             <div class="clearfix"></div>
