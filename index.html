@@ -42,7 +42,7 @@
 <div class="intrude-less">
 	<header id="header" class="inner">
 		<a href="/" class="profilepic">
-			<img src="./img/head.jpg" class="js-avatar">
+			<img src="" class="js-avatar">
 		</a>
 		<hgroup>
 		  <h1 class="header-author"><a href="/">lavijiang</a></h1>
@@ -150,6 +150,139 @@
           </div>
           <div id="js-content" class="content-ll">
             
+  
+    <article id="post-JSP-Servlet技术详解" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2017/08/28/JSP-Servlet技术详解/">JSP/Servlet技术详解</a>
+    </h1>
+  
+
+        
+        <a href="/2017/08/28/JSP-Servlet技术详解/" class="archive-article-date">
+  	<time datetime="2017-08-28T02:16:01.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-08-28</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>JSP(java server page)和Servlet是Java EE的两个基本成员，本质一样，JSP最终必须编译成Servlet才能运行。<br>JSP特点是在HTML页面嵌入Java代码，或使用JSP标签，包括用户自定义标签，动态呈现网页（作为表现层，而不作为逻辑组件和持久层组件）。</p>
+<p>#JSP</p>
+<h2 id="JSP内容"><a href="#JSP内容" class="headerlink" title="JSP内容"></a><strong>JSP内容</strong></h2><ul>
+<li>静态部分：标准的HTML标签、静态页面内容  </li>
+<li>动态部分：Java脚本，放在&lt;%和%&gt;之间</li>
+</ul>
+<h2 id="JSP的3个编译指令"><a href="#JSP的3个编译指令" class="headerlink" title="JSP的3个编译指令"></a><strong>JSP的3个编译指令</strong></h2><ul>
+<li>page：针对当前页面指令 </li>
+<li>include：指定包含另一个页面（静态引入）  </li>
+<li>taglib：用于定义和访问自定义标签</li>
+</ul>
+<h2 id="JSP的7个动作指令"><a href="#JSP的7个动作指令" class="headerlink" title="JSP的7个动作指令"></a><strong>JSP的7个动作指令</strong></h2><ul>
+<li>jsp:forward ：执行页面转向（仍然是一次请求，请求地址不会改变） </li>
+<li>jsp:param ：传递参数  </li>
+<li>jsp:include ：动态引入jsp页面（动态导入使用include方法引入被导入页面的内容，被导入页面的编译指令失去作用，还可以包含额外的参数）  </li>
+<li>jsp:plugin ：用于下载JavaBean或Applet到客户端执行</li>
+<li>jsp:useBean： 创建一个JavaBean实例  </li>
+<li>jsp:setProperty： 设置JavaBean实例的属性值  </li>
+<li>jsp:getProperty： 输出JavaBean实例的属性值  </li>
+</ul>
+<h2 id="JSP脚本的9个内置对象"><a href="#JSP脚本的9个内置对象" class="headerlink" title="JSP脚本的9个内置对象"></a><strong>JSP脚本的9个内置对象</strong></h2><ul>
+<li>application：javax.servlet.ServletContext的实例，代表jsp所属的Web应用本身 </li>
+<li>config：javax.servlet.ServletConfig的实例，代表该jsp的配置信息 </li>
+<li>exception：java.lang.Throwable的实例，代表其他页面中的异常和错误  </li>
+<li>out: javax.servlet.jsp.JspWriter的实例，输出流，用于形成HTML页面</li>
+<li>page：代表页面本身，可用this替代  </li>
+<li>pageContext：javax.servlet.jsp.PageContext的实例，代表JSP页面上下文，可用来访问页面中的共享数据</li>
+<li>request：javax.servlet.http.HttpServletRequest的实例，封装了客户端的请求参数  </li>
+<li>response：javax.servlet.http.HttpServletResponse的实例，代表服务器对客户端的响应，常用于重定向</li>
+<li>session: javax.servlet.http.HttpSession的实例，代表一次会话</li>
+</ul>
+<p>#Servlet</p>
+<h2 id="Servlet简介"><a href="#Servlet简介" class="headerlink" title="Servlet简介"></a><strong>Servlet简介</strong></h2><p>Servlet是运行在服务器端的小程序，用于处理及响应客户端的请求，它是个特殊的Java类，必须继承HttpServlet。  </p>
+<ul>
+<li>doGet：用于响应客户端的GET请求</li>
+<li>doPost：POST请求</li>
+<li>doPut：PUT请求</li>
+<li>doDelete：DELETE请求</li>
+</ul>
+<h2 id="JSP-Servlet生命周期"><a href="#JSP-Servlet生命周期" class="headerlink" title="JSP/Servlet生命周期"></a><strong>JSP/Servlet生命周期</strong></h2><ol>
+<li>初始化阶段：Web容器调用Servlet的init()方法，对Servlet进行初始化，只调用一次  </li>
+<li>响应客户请求阶段：调用service()方法响应客户请求</li>
+<li>终止阶段：调用destroy()方法销毁Servlet</li>
+</ol>
+<h2 id="标准的MVC模式"><a href="#标准的MVC模式" class="headerlink" title="标准的MVC模式"></a><strong>标准的MVC模式</strong></h2><ul>
+<li>View：使用JSP，作用：  <ul>
+<li>收集用户请求参数  </li>
+<li>将处理结果返回给用户</li>
+</ul>
+</li>
+<li>Controller：使用Servlet：所有用户请求发送给Servlet，Servlet调用Model来处理用户请求，并调用JSP来呈现处理结果；或者Servlet直接调用JSP将状态数据呈现。</li>
+<li>Model：JavaBean，所有的业务逻辑、数据访问逻辑都在Model中实现。</li>
+</ul>
+<h2 id="Filter"><a href="#Filter" class="headerlink" title="Filter"></a><strong>Filter</strong></h2><p>加强版的Servlet，起过滤作用：Filter对请求进行预处理，将请求交给Servlet处理，最后对响应进行后处理。<br>创建Filter必须实现javax.servlet.Filter接口，有如下方法:  </p>
+<ul>
+<li>void init(FilterConfig config)：初始化</li>
+<li>void doFilter(ServletRequest req,ServletResponse res,FilterChain chain)：实现过滤功能</li>
+<li>void destroy()：用于Filter销毁前，完成资源回收 </li>
+</ul>
+<h2 id="Listener"><a href="#Listener" class="headerlink" title="Listener"></a><strong>Listener</strong></h2><p>Servlet提供了大量监听器来监听Web应用的内部事件，从而允许当Web内部事件发生时回调事件监听器内的方法。  </p>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">java</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2017/08/28/JSP-Servlet技术详解/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
   
     <article id="post-线程安全性" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
@@ -395,6 +528,10 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
           <ul class="article-tag-list" q-show="showTags">
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">java</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">concurrency</a>
               </li>
             
@@ -478,7 +615,7 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
     
     	<section class="tools-section tools-section-me" q-show="aboutme">
   	  	
-  	  		<div class="aboutme-wrap" id="js-aboutme">遇事不决转码农&lt;br&gt;&lt;br&gt;</div>
+  	  		<div class="aboutme-wrap" id="js-aboutme">很惭愧&lt;br&gt;&lt;br&gt;只做了一点微小的工作&lt;br&gt;谢谢大家</div>
   	  	
     	</section>
     
