@@ -6,14 +6,19 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="http://yoursite.com">
-  <title>Tag: java | lavi&#39;s Blog</title>
+  <title>链表 | lavi&#39;s Blog</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta property="og:type" content="website">
-<meta property="og:title" content="lavi&#39;s Blog">
-<meta property="og:url" content="http://yoursite.com/tags/java/index.html">
+  <meta name="description" content="链表优点：高效的节点重排、顺序的节点访问、灵活的地调整链表长度。Redis的发布与订阅、慢查询、监视器等功能也用到了链表。   链表及链表节点定义typedef struct listNode{     struct listNode *prev;     struct listNode *next;     void *value; }listNode;  typedef struct list">
+<meta name="keywords" content="redis">
+<meta property="og:type" content="article">
+<meta property="og:title" content="链表">
+<meta property="og:url" content="http://yoursite.com/2017/08/30/链表/index.html">
 <meta property="og:site_name" content="lavi&#39;s Blog">
+<meta property="og:description" content="链表优点：高效的节点重排、顺序的节点访问、灵活的地调整链表长度。Redis的发布与订阅、慢查询、监视器等功能也用到了链表。   链表及链表节点定义typedef struct listNode{     struct listNode *prev;     struct listNode *next;     void *value; }listNode;  typedef struct list">
+<meta property="og:updated_time" content="2017-08-30T07:17:03.854Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="lavi&#39;s Blog">
+<meta name="twitter:title" content="链表">
+<meta name="twitter:description" content="链表优点：高效的节点重排、顺序的节点访问、灵活的地调整链表长度。Redis的发布与订阅、慢查询、监视器等功能也用到了链表。   链表及链表节点定义typedef struct listNode{     struct listNode *prev;     struct listNode *next;     void *value; }listNode;  typedef struct list">
   
     <link rel="alternative" href="/atom.xml" title="lavi&#39;s Blog" type="application/atom+xml">
   
@@ -145,60 +150,184 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            
-  
-  
+            <article id="post-链表" class="article article-type-post " itemscope itemprop="blogPost">
+  <div class="article-inner">
     
-    
-      
-      
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/archives/2017" class="archive-year">2017</a>
-        </div>
-        <div class="archives">
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2017/08/28/JSP-Servlet技术详解/" class="archive-article-date">
-  	<time datetime="2017-08-28T02:16:01.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-08-28</time>
-</a>
-        </div>
-    	 
+      <header class="article-header">
+        
   
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2017/08/28/JSP-Servlet技术详解/">JSP/Servlet技术详解</a>
+    <h1 class="article-title" itemprop="name">
+      链表
     </h1>
   
 
-        <div class="article-info info-on-right">
-          
+        
+        <a href="/2017/08/30/链表/" class="archive-article-date">
+  	<time datetime="2017-08-30T06:08:21.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-08-30</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>链表优点：高效的节点重排、顺序的节点访问、灵活的地调整链表长度。Redis的发布与订阅、慢查询、监视器等功能也用到了链表。  </p>
+<h2 id="链表及链表节点定义"><a href="#链表及链表节点定义" class="headerlink" title="链表及链表节点定义"></a><strong>链表及链表节点定义</strong></h2><pre><code>typedef struct listNode{
+    struct listNode *prev;
+    struct listNode *next;
+    void *value;
+}listNode;
+
+typedef struct list{
+    listNode *head;
+    listNode *tail;
+    //节点值复制函数
+    void *(*dup)(void *ptr);
+    //节点值释放函数
+    void (*free)(void *ptr);
+    //节点值匹配查找函数
+    int (*match)(void *ptr,void *key);
+    //链表包含的节点数
+    unsigned long len;
+}list;
+/*双向链表迭代器*/
+typedef struct listIter{
+    listNode *head;
+    int direction;
+}listIter;
+</code></pre><h2 id="链表特点"><a href="#链表特点" class="headerlink" title="链表特点"></a><strong>链表特点</strong></h2><p>Redis实现的链表特性：  </p>
+<ul>
+<li>双端：链表节点带有prev和next指针，且实现了双向迭代器</li>
+<li>无环：表头节点prev和表位的next都指向NULL</li>
+<li>定义了表头和表尾指针</li>
+<li>带链表长度计数器</li>
+<li>多态：链表节点使用void*指针保存节点值，并且list中的dup、free、match的类型也可以设定</li>
+</ul>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
 	<div class="article-tag tagcloud">
 		<i class="icon-price-tags icon"></i>
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">java</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">redis</a>
         		</li>
       		
 		</ul>
 	</div>
 
-          
+      
 
+      
+
+      
+        
+<div class="share-btn share-icons tooltip-left">
+  <div class="tooltip tooltip-east">
+    <span class="tooltip-item">
+      <a href="javascript:;" class="share-sns share-outer">
+        <i class="icon icon-share"></i>
+      </a>
+    </span>
+    <span class="tooltip-content">
+      <div class="share-wrap">
+        <div class="share-icons">
+          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
+            <i class="icon icon-weibo"></i>
+          </a>
+          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
+            <i class="icon icon-weixin"></i>
+          </a>
+          <a class="qq share-sns" href="javascript:;" data-type="qq">
+            <i class="icon icon-qq"></i>
+          </a>
+          <a class="douban share-sns" href="javascript:;" data-type="douban">
+            <i class="icon icon-douban"></i>
+          </a>
+          <a class="qzone share-sns" href="javascript:;" data-type="qzone">
+            <i class="icon icon-qzone"></i>
+          </a>
+          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
+            <i class="icon icon-facebook"></i>
+          </a>
+          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
+            <i class="icon icon-twitter"></i>
+          </a>
+          <a class="google share-sns" href="javascript:;" data-type="google">
+            <i class="icon icon-google"></i>
+          </a>
         </div>
-        <div class="clearfix"></div>
-    </header>
+      </div>
+    </span>
+  </div>
+</div>
+
+<div class="page-modal wx-share js-wx-box">
+    <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <div class="wx-qrcode">
+      <img src="http://s.jiathis.com/qrcode.php?url=http://yoursite.com/2017/08/30/链表/" alt="微信分享二维码">
+    </div>
+</div>
+
+<div class="mask js-mask"></div>
+      
+      <div class="clearfix"></div>
+    </div>
   </div>
 </article>
+
+  
+<nav id="article-nav">
+  
+    <a href="/2017/08/30/字典/" id="article-nav-newer" class="article-nav-link-wrap">
+      <i class="icon-circle-left"></i>
+      <div class="article-nav-title">
+        
+          字典
+        
+      </div>
+    </a>
   
   
-    </div></section>
+    <a href="/2017/08/30/简单动态字符串/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">简单动态字符串</div>
+      <i class="icon-circle-right"></i>
+    </a>
+  
+</nav>
+
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+  
+  
   
 
-    
+  
+
+  
 
 
           </div>
@@ -221,9 +350,9 @@
 	var yiliaConfig = {
 		mathjax: false,
 		isHome: false,
-		isPost: false,
+		isPost: true,
 		isArchive: false,
-		isTag: true,
+		isTag: false,
 		isCategory: false,
 		open_in_new: false,
 		toc_hide_index: true,
