@@ -6,21 +6,19 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="http://yoursite.com">
-  <title>Spring简介 | lavi&#39;s Blog</title>
+  <title>对象的共享 | lavi&#39;s Blog</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="Spring优点Spring精髓：基于依赖注入（Dependency Injection）/控制反转（Inversion of Control）核心机制、基于AOP的事务管理、与多种持久层框架的整合、优秀的Web MVC框架。  Ioc容器降低了业务对象替换的复杂性，降低组件之间的耦合 AOP支持将通用任务如安全验证、日志、事务集中处理，更好的复用 ORM和DAO提供了与第三方持久层框架的整合，简">
-<meta name="keywords" content="Spring">
+  <meta name="description" content="可见性（Visibility）当一个线程修改了共享变量的值，其他线程能够立刻得知这个修改。 原子性（Atomicity）即一个操作或者多个操作，要么全部执行并且执行的过程不会被任何因素打断，要么就都不执行。加锁机制既可以保证可见性又可以保证原子性，而volatile变量只能确保可见性。">
+<meta name="keywords" content="concurrency">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Spring简介">
-<meta property="og:url" content="http://yoursite.com/2017/08/28/Spring简介/index.html">
+<meta property="og:title" content="对象的共享">
+<meta property="og:url" content="http://yoursite.com/2017/08/28/对象的共享/index.html">
 <meta property="og:site_name" content="lavi&#39;s Blog">
-<meta property="og:description" content="Spring优点Spring精髓：基于依赖注入（Dependency Injection）/控制反转（Inversion of Control）核心机制、基于AOP的事务管理、与多种持久层框架的整合、优秀的Web MVC框架。  Ioc容器降低了业务对象替换的复杂性，降低组件之间的耦合 AOP支持将通用任务如安全验证、日志、事务集中处理，更好的复用 ORM和DAO提供了与第三方持久层框架的整合，简">
-<meta property="og:image" content="http://yoursite.com/img/spring.jpg">
-<meta property="og:updated_time" content="2017-08-28T04:50:11.321Z">
+<meta property="og:description" content="可见性（Visibility）当一个线程修改了共享变量的值，其他线程能够立刻得知这个修改。 原子性（Atomicity）即一个操作或者多个操作，要么全部执行并且执行的过程不会被任何因素打断，要么就都不执行。加锁机制既可以保证可见性又可以保证原子性，而volatile变量只能确保可见性。">
+<meta property="og:updated_time" content="2017-08-28T09:49:03.409Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Spring简介">
-<meta name="twitter:description" content="Spring优点Spring精髓：基于依赖注入（Dependency Injection）/控制反转（Inversion of Control）核心机制、基于AOP的事务管理、与多种持久层框架的整合、优秀的Web MVC框架。  Ioc容器降低了业务对象替换的复杂性，降低组件之间的耦合 AOP支持将通用任务如安全验证、日志、事务集中处理，更好的复用 ORM和DAO提供了与第三方持久层框架的整合，简">
-<meta name="twitter:image" content="http://yoursite.com/img/spring.jpg">
+<meta name="twitter:title" content="对象的共享">
+<meta name="twitter:description" content="可见性（Visibility）当一个线程修改了共享变量的值，其他线程能够立刻得知这个修改。 原子性（Atomicity）即一个操作或者多个操作，要么全部执行并且执行的过程不会被任何因素打断，要么就都不执行。加锁机制既可以保证可见性又可以保证原子性，而volatile变量只能确保可见性。">
   
     <link rel="alternative" href="/atom.xml" title="lavi&#39;s Blog" type="application/atom+xml">
   
@@ -152,49 +150,28 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            <article id="post-Spring简介" class="article article-type-post " itemscope itemprop="blogPost">
+            <article id="post-对象的共享" class="article article-type-post " itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
     <h1 class="article-title" itemprop="name">
-      Spring简介
+      对象的共享
     </h1>
   
 
         
-        <a href="/2017/08/28/Spring简介/" class="archive-article-date">
-  	<time datetime="2017-08-28T04:06:42.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-08-28</time>
+        <a href="/2017/08/28/对象的共享/" class="archive-article-date">
+  	<time datetime="2017-08-28T08:51:32.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-08-28</time>
 </a>
         
       </header>
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h2 id="Spring优点"><a href="#Spring优点" class="headerlink" title="Spring优点"></a><strong>Spring优点</strong></h2><p>Spring精髓：基于依赖注入（Dependency Injection）/控制反转（Inversion of Control）核心机制、基于AOP的事务管理、与多种持久层框架的整合、优秀的Web MVC框架。</p>
-<ul>
-<li>Ioc容器降低了业务对象替换的复杂性，降低组件之间的耦合</li>
-<li>AOP支持将通用任务如安全验证、日志、事务集中处理，更好的复用</li>
-<li>ORM和DAO提供了与第三方持久层框架的整合，简化了数据库访问</li>
-</ul>
-<h2 id="Spring的整体架构"><a href="#Spring的整体架构" class="headerlink" title="Spring的整体架构"></a><strong>Spring的整体架构</strong></h2><p>Spring是一个分层框架。<br><img src="/img/spring.jpg" alt="spring结构图">  </p>
-<p>模块大致为以下几个部分：  </p>
-<ol>
-<li>Core Container<br>核心容器包含<strong>Core、Beans</strong>、Context和Expression Language模块。  <ul>
-<li>Core和Beans是框架的基础部分，提供Ioc和DI特性。  </li>
-<li>BeanFactory提供对Factory模式的实现来消除对单例模式的需要。 </li>
-</ul>
-</li>
-<li>Data Access/Integration<br>包含JDBC、ORM、OXM、JMS和Transaction模块。  <ul>
-<li>JDBC消除冗长的JDBC编码，包含Spring对JDBC数据访问的所有类 </li>
-<li>ORM为对象——关系映射API，如Hibernate、iBatis，进行O/R映射  </li>
-</ul>
-</li>
-<li>Web<br>Web上下文模块为基于Web的应用程序提供了上下文，包含Web、Web-Servlet、Web-Struts和Web-Porlet。</li>
-<li>AOP<br>实现了面向切面编程，定义方法拦截器和切点，从而将逻辑代码分开，降低耦合。  </li>
-<li>Test<br>支持使用JUnit和TestNG对Spring组件进行测试</li>
-</ol>
+        <h2 id="可见性（Visibility）"><a href="#可见性（Visibility）" class="headerlink" title="可见性（Visibility）"></a><strong>可见性（Visibility）</strong></h2><p>当一个线程修改了共享变量的值，其他线程能够立刻得知这个修改。</p>
+<h2 id="原子性（Atomicity）"><a href="#原子性（Atomicity）" class="headerlink" title="原子性（Atomicity）"></a><strong>原子性（Atomicity）</strong></h2><p>即一个操作或者多个操作，要么全部执行并且执行的过程不会被任何因素打断，要么就都不执行。<br><strong>加锁机制既可以保证可见性又可以保证原子性，而volatile变量只能确保可见性。</strong></p>
 
       
 
@@ -208,7 +185,7 @@
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">Spring</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">concurrency</a>
         		</li>
       		
 		</ul>
@@ -264,7 +241,7 @@
     <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
     <p>扫一扫，分享到微信</p>
     <div class="wx-qrcode">
-      <img src="http://s.jiathis.com/qrcode.php?url=http://yoursite.com/2017/08/28/Spring简介/" alt="微信分享二维码">
+      <img src="http://s.jiathis.com/qrcode.php?url=http://yoursite.com/2017/08/28/对象的共享/" alt="微信分享二维码">
     </div>
 </div>
 
@@ -278,18 +255,18 @@
   
 <nav id="article-nav">
   
-    <a href="/2017/08/28/Spring容器/" id="article-nav-newer" class="article-nav-link-wrap">
+    <a href="/2017/08/30/简单动态字符串/" id="article-nav-newer" class="article-nav-link-wrap">
       <i class="icon-circle-left"></i>
       <div class="article-nav-title">
         
-          Spring容器
+          简单动态字符串
         
       </div>
     </a>
   
   
-    <a href="/2017/08/28/JSP-Servlet技术详解/" id="article-nav-older" class="article-nav-link-wrap">
-      <div class="article-nav-title">JSP/Servlet技术详解</div>
+    <a href="/2017/08/28/Spring容器/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">Spring容器</div>
       <i class="icon-circle-right"></i>
     </a>
   
