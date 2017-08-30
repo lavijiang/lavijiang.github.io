@@ -388,10 +388,10 @@ struct __attribute__ ((__packed__)) sdshdr64 {
 <h2 id="SDS与C字符串的对比"><a href="#SDS与C字符串的对比" class="headerlink" title="SDS与C字符串的对比"></a><strong>SDS与C字符串的对比</strong></h2><ol>
 <li>O(1)时间获取字符串长度<br>获取一个C字符串长度，必须遍历整个字符串，时间O(N)。<br>SDS在len中记录了字符串长度。</li>
 <li>缓冲器溢出<br>C字符串不记录自身长度，容易造成缓冲区溢出。  </li>
-<li>减少修改字符串造成的内存重分配<br>每次增长或缩短C字符串，程序都要对这个数组进行内存重分配。<br>通过未使用空间，SDS实现了空间预分配和惰性空间释放两种优化策略（vector也采用了这种思想）。<ol>
-<li>空间预分配<br>优化SDS字符串增长：<br> 1） SDS修改后长度小于1MB，程序分配和len相同的未使用空间。buf的实际长度=2*len+1byte<br> 2） 大于等于1MB，分配1MB未使用空间。buf=len+1MB+1byte</li>
-<li>惰性空间释放<br>优化SDS字符串缩短：当SDS缩短字符串时，程序并不使用内存重分配来收回多出的字节数，而是使用free记录。</li>
-</ol>
+<li>减少修改字符串造成的内存重分配<br>每次增长或缩短C字符串，程序都要对这个数组进行内存重分配。<br>通过未使用空间，SDS实现了空间预分配和惰性空间释放两种优化策略（vector也采用了这种思想）。<ul>
+<li>空间预分配：优化SDS字符串增长：<br>  1） SDS修改后长度小于1MB，程序分配和len相同的未使用空间。buf的实际长度=2*len+1byte<br>  2） 大于等于1MB，分配1MB未使用空间。buf=len+1MB+1byte</li>
+<li>惰性空间释放：优化SDS字符串缩短：当SDS缩短字符串时，程序并不使用内存重分配来收回多出的字节数，而是使用free记录。</li>
+</ul>
 </li>
 <li>二进制安全<br>C字符串字符必须符合某种编码，字符串中不能有空字符。这样就不能保存任意格式的二进制数据，比如图片、视频和音频。  </li>
 <li>兼容部分C字符串函数</li>
@@ -593,9 +593,7 @@ struct __attribute__ ((__packed__)) sdshdr64 {
 <li>如果这个Bean实现了ApplicationContextAware接口，会调用setApplicationContext(ApplicationContext)方法，传入Spring上下文，该方式同样可以实现步骤4，但比4更好，以为ApplicationContext是BeanFactory的子接口，有更多的实现方法</li>
 <li>如果这个Bean关联了BeanPostProcessor接口，将会调用postProcessBeforeInitialization(Object obj, String s)方法，BeanPostProcessor经常被用作是Bean内容的更改，并且由于这个是在Bean初始化结束时调用After方法，也可用于内存或缓存技术</li>
 <li>如果这个Bean在Spring配置文件中配置了init-method属性会自动调用其配置的初始化方法</li>
-<li><p>如果这个Bean关联了BeanPostProcessor接口，将会调用postAfterInitialization(Object obj, String s)方法</p>
-<p> 注意：以上工作完成以后就可以用这个Bean了，那这个Bean是一个single的，所以一般情况下我们调用同一个ID的Bean会是在内容地址相同的实例</p>
-</li>
+<li>如果这个Bean关联了BeanPostProcessor接口，将会调用postAfterInitialization(Object obj, String s)方法<br> 注意：以上工作完成以后就可以用这个Bean了，那这个Bean是一个single的，所以一般情况下我们调用同一个ID的Bean会是在内容地址相同的实例</li>
 <li>当Bean不再需要时，会经过清理阶段，如果Bean实现了DisposableBean接口，会调用其实现的destroy方法</li>
 <li>最后，如果这个Bean的Spring配置中配置了destroy-method属性，会自动调用其配置的销毁方法</li>
 </ol>
@@ -1126,11 +1124,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">redis</a>
+                <a href="javascript:void(0)" class="js-tag color2">concurrency</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">concurrency</a>
+                <a href="javascript:void(0)" class="js-tag color1">redis</a>
               </li>
             
             <div class="clearfix"></div>

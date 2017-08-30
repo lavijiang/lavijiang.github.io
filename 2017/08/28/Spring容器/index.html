@@ -16,7 +16,7 @@
 <meta property="og:site_name" content="lavi&#39;s Blog">
 <meta property="og:description" content="Spring管理BeanSpring使用XML配置文件管理容器中的Bean，配置文件中的元素默认以反射方式来调用该类无参构造器。因此该类不能是接口、抽象类，且必须有无参构造器。ApplicationContext是Spring容器最常用的接口，有两个实现类：    ClassPathXmlApplicationContext：从类加载路径下搜索配置文件，并创建Spring容器（常用） FileSy">
 <meta property="og:image" content="http://yoursite.com/img/spring-bean.jpg">
-<meta property="og:updated_time" content="2017-08-30T12:58:41.219Z">
+<meta property="og:updated_time" content="2017-08-30T13:00:14.266Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Spring容器">
 <meta name="twitter:description" content="Spring管理BeanSpring使用XML配置文件管理容器中的Bean，配置文件中的元素默认以反射方式来调用该类无参构造器。因此该类不能是接口、抽象类，且必须有无参构造器。ApplicationContext是Spring容器最常用的接口，有两个实现类：    ClassPathXmlApplicationContext：从类加载路径下搜索配置文件，并创建Spring容器（常用） FileSy">
@@ -221,9 +221,7 @@
 <li>如果这个Bean实现了ApplicationContextAware接口，会调用setApplicationContext(ApplicationContext)方法，传入Spring上下文，该方式同样可以实现步骤4，但比4更好，以为ApplicationContext是BeanFactory的子接口，有更多的实现方法</li>
 <li>如果这个Bean关联了BeanPostProcessor接口，将会调用postProcessBeforeInitialization(Object obj, String s)方法，BeanPostProcessor经常被用作是Bean内容的更改，并且由于这个是在Bean初始化结束时调用After方法，也可用于内存或缓存技术</li>
 <li>如果这个Bean在Spring配置文件中配置了init-method属性会自动调用其配置的初始化方法</li>
-<li><p>如果这个Bean关联了BeanPostProcessor接口，将会调用postAfterInitialization(Object obj, String s)方法</p>
-<p> 注意：以上工作完成以后就可以用这个Bean了，那这个Bean是一个single的，所以一般情况下我们调用同一个ID的Bean会是在内容地址相同的实例</p>
-</li>
+<li>如果这个Bean关联了BeanPostProcessor接口，将会调用postAfterInitialization(Object obj, String s)方法<br> 注意：以上工作完成以后就可以用这个Bean了，那这个Bean是一个single的，所以一般情况下我们调用同一个ID的Bean会是在内容地址相同的实例</li>
 <li>当Bean不再需要时，会经过清理阶段，如果Bean实现了DisposableBean接口，会调用其实现的destroy方法</li>
 <li>最后，如果这个Bean的Spring配置中配置了destroy-method属性，会自动调用其配置的销毁方法</li>
 </ol>
@@ -446,11 +444,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">redis</a>
+                <a href="javascript:void(0)" class="js-tag color2">concurrency</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">concurrency</a>
+                <a href="javascript:void(0)" class="js-tag color1">redis</a>
               </li>
             
             <div class="clearfix"></div>
