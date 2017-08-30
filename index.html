@@ -567,7 +567,8 @@ struct __attribute__ ((__packed__)) sdshdr64 {
 <li>ApplicationListener：监听器，容器中的任何监听器Bean担任</li>
 </ul>
 <h2 id="创建Bean的3种方式"><a href="#创建Bean的3种方式" class="headerlink" title="创建Bean的3种方式"></a><strong>创建Bean的3种方式</strong></h2><ol>
-<li>使用构造器创建Bean实例</li>
+<li><p>使用构造器创建Bean实例</p>
+</li>
 <li><p>使用静态工厂方法创建Bean<br>采用静态工厂方法创建Bean实例时，<bean>元素需要指定如下两个属性：  </bean></p>
 <ul>
 <li>class：该属性的值为静态工厂类的类名</li>
@@ -603,10 +604,8 @@ struct __attribute__ ((__packed__)) sdshdr64 {
 <li><p>如果这个Bean在Spring配置文件中配置了init-method属性会自动调用其配置的初始化方法</p>
 </li>
 <li><p>如果这个Bean关联了BeanPostProcessor接口，将会调用postAfterInitialization(Object obj, String s)方法</p>
+<p> 注意：以上工作完成以后就可以用这个Bean了，那这个Bean是一个single的，所以一般情况下我们调用同一个ID的Bean会是在内容地址相同的实例</p>
 </li>
-</ol>
-<p>注意：以上工作完成以后就可以用这个Bean了，那这个Bean是一个single的，所以一般情况下我们调用同一个ID的Bean会是在内容地址相同的实例</p>
-<ol>
 <li><p>当Bean不再需要时，会经过清理阶段，如果Bean实现了DisposableBean接口，会调用其实现的destroy方法</p>
 </li>
 <li><p>最后，如果这个Bean的Spring配置中配置了destroy-method属性，会自动调用其配置的销毁方法</p>

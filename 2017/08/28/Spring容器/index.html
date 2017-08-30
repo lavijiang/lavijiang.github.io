@@ -16,7 +16,7 @@
 <meta property="og:site_name" content="lavi&#39;s Blog">
 <meta property="og:description" content="Spring管理BeanSpring使用XML配置文件管理容器中的Bean，配置文件中的元素默认以反射方式来调用该类无参构造器。因此该类不能是接口、抽象类，且必须有无参构造器。ApplicationContext是Spring容器最常用的接口，有两个实现类：    ClassPathXmlApplicationContext：从类加载路径下搜索配置文件，并创建Spring容器（常用） FileSy">
 <meta property="og:image" content="http://yoursite.com/img/spring-bean.jpg">
-<meta property="og:updated_time" content="2017-08-30T12:48:19.022Z">
+<meta property="og:updated_time" content="2017-08-30T12:53:02.468Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Spring容器">
 <meta name="twitter:description" content="Spring管理BeanSpring使用XML配置文件管理容器中的Bean，配置文件中的元素默认以反射方式来调用该类无参构造器。因此该类不能是接口、抽象类，且必须有无参构造器。ApplicationContext是Spring容器最常用的接口，有两个实现类：    ClassPathXmlApplicationContext：从类加载路径下搜索配置文件，并创建Spring容器（常用） FileSy">
@@ -195,7 +195,8 @@
 <li>ApplicationListener：监听器，容器中的任何监听器Bean担任</li>
 </ul>
 <h2 id="创建Bean的3种方式"><a href="#创建Bean的3种方式" class="headerlink" title="创建Bean的3种方式"></a><strong>创建Bean的3种方式</strong></h2><ol>
-<li>使用构造器创建Bean实例</li>
+<li><p>使用构造器创建Bean实例</p>
+</li>
 <li><p>使用静态工厂方法创建Bean<br>采用静态工厂方法创建Bean实例时，<bean>元素需要指定如下两个属性：  </bean></p>
 <ul>
 <li>class：该属性的值为静态工厂类的类名</li>
@@ -231,10 +232,8 @@
 <li><p>如果这个Bean在Spring配置文件中配置了init-method属性会自动调用其配置的初始化方法</p>
 </li>
 <li><p>如果这个Bean关联了BeanPostProcessor接口，将会调用postAfterInitialization(Object obj, String s)方法</p>
+<p> 注意：以上工作完成以后就可以用这个Bean了，那这个Bean是一个single的，所以一般情况下我们调用同一个ID的Bean会是在内容地址相同的实例</p>
 </li>
-</ol>
-<p>注意：以上工作完成以后就可以用这个Bean了，那这个Bean是一个single的，所以一般情况下我们调用同一个ID的Bean会是在内容地址相同的实例</p>
-<ol>
 <li><p>当Bean不再需要时，会经过清理阶段，如果Bean实现了DisposableBean接口，会调用其实现的destroy方法</p>
 </li>
 <li><p>最后，如果这个Bean的Spring配置中配置了destroy-method属性，会自动调用其配置的销毁方法</p>
