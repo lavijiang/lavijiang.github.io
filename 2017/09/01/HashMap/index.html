@@ -6,19 +6,22 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="http://yoursite.com">
-  <title>简单动态字符串 | lavi&#39;s Blog</title>
+  <title>HashMap | lavi&#39;s Blog</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="C语言传统的字符串表示：以’\0’结束的字符序列。redis的默认字符串：简单动态字符串（simple dynamic string,SDS）。 SDS定义redis2.9   struct sdshdr{     //SDS保存字符串长度，等于buf数组已使用字节数     int len;     //buf数组未使用字节数     int free;     //字节数组，用于保存字符串">
-<meta name="keywords" content="redis">
+  <meta name="description" content="数组与链表数组存储区间是连续的，占用内存严重。但数组的二分查找时间复杂度小，为O(logN)；数组的特点是：寻址容易，插入和删除困难；链表存储区间离散，占用内存比较宽松，故空间复杂度很小，但查找的时间复杂度很大。链表的特点是：寻址困难，插入和删除容易。哈希表综合两者的特性，做出一种寻址容易，插入删除也容易的数据结构。哈希表既满足了数据的查找方便，同时不占用太多的内容空间，使用也十分方便。 Hash">
+<meta name="keywords" content="java">
 <meta property="og:type" content="article">
-<meta property="og:title" content="简单动态字符串">
-<meta property="og:url" content="http://yoursite.com/2017/08/30/简单动态字符串/index.html">
+<meta property="og:title" content="HashMap">
+<meta property="og:url" content="http://yoursite.com/2017/09/01/HashMap/index.html">
 <meta property="og:site_name" content="lavi&#39;s Blog">
-<meta property="og:description" content="C语言传统的字符串表示：以’\0’结束的字符序列。redis的默认字符串：简单动态字符串（simple dynamic string,SDS）。 SDS定义redis2.9   struct sdshdr{     //SDS保存字符串长度，等于buf数组已使用字节数     int len;     //buf数组未使用字节数     int free;     //字节数组，用于保存字符串">
-<meta property="og:updated_time" content="2017-08-30T13:15:11.244Z">
+<meta property="og:description" content="数组与链表数组存储区间是连续的，占用内存严重。但数组的二分查找时间复杂度小，为O(logN)；数组的特点是：寻址容易，插入和删除困难；链表存储区间离散，占用内存比较宽松，故空间复杂度很小，但查找的时间复杂度很大。链表的特点是：寻址困难，插入和删除容易。哈希表综合两者的特性，做出一种寻址容易，插入删除也容易的数据结构。哈希表既满足了数据的查找方便，同时不占用太多的内容空间，使用也十分方便。 Hash">
+<meta property="og:image" content="http://yoursite.com/img/HashMap1.jpg">
+<meta property="og:image" content="http://yoursite.com/img/HashMap2.jpg">
+<meta property="og:updated_time" content="2017-09-01T16:23:37.185Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="简单动态字符串">
-<meta name="twitter:description" content="C语言传统的字符串表示：以’\0’结束的字符序列。redis的默认字符串：简单动态字符串（simple dynamic string,SDS）。 SDS定义redis2.9   struct sdshdr{     //SDS保存字符串长度，等于buf数组已使用字节数     int len;     //buf数组未使用字节数     int free;     //字节数组，用于保存字符串">
+<meta name="twitter:title" content="HashMap">
+<meta name="twitter:description" content="数组与链表数组存储区间是连续的，占用内存严重。但数组的二分查找时间复杂度小，为O(logN)；数组的特点是：寻址容易，插入和删除困难；链表存储区间离散，占用内存比较宽松，故空间复杂度很小，但查找的时间复杂度很大。链表的特点是：寻址困难，插入和删除容易。哈希表综合两者的特性，做出一种寻址容易，插入删除也容易的数据结构。哈希表既满足了数据的查找方便，同时不占用太多的内容空间，使用也十分方便。 Hash">
+<meta name="twitter:image" content="http://yoursite.com/img/HashMap1.jpg">
   
     <link rel="alternative" href="/atom.xml" title="lavi&#39;s Blog" type="application/atom+xml">
   
@@ -150,77 +153,37 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            <article id="post-简单动态字符串" class="article article-type-post " itemscope itemprop="blogPost">
+            <article id="post-HashMap" class="article article-type-post " itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
     <h1 class="article-title" itemprop="name">
-      简单动态字符串
+      HashMap
     </h1>
   
 
         
-        <a href="/2017/08/30/简单动态字符串/" class="archive-article-date">
-  	<time datetime="2017-08-30T03:43:03.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-08-30</time>
+        <a href="/2017/09/01/HashMap/" class="archive-article-date">
+  	<time datetime="2017-09-01T15:19:18.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-09-01</time>
 </a>
         
       </header>
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>C语言传统的字符串表示：以’\0’结束的字符序列。<br>redis的默认字符串：<strong>简单动态字符串（simple dynamic string,SDS）</strong>。</p>
-<h2 id="SDS定义"><a href="#SDS定义" class="headerlink" title="SDS定义"></a><strong>SDS定义</strong></h2><p>redis2.9  </p>
-<pre><code>struct sdshdr{
-    //SDS保存字符串长度，等于buf数组已使用字节数
-    int len;
-    //buf数组未使用字节数
-    int free;
-    //字节数组，用于保存字符串
-    char buf[];
-}；
-</code></pre><p>redis4.0.1</p>
-<pre><code>struct __attribute__ ((__packed__)) sdshdr5 {  
-    unsigned char flags; /* 3 lsb of type, and 5 msb of string length */  
-    char buf[];  
-};  
-struct __attribute__ ((__packed__)) sdshdr8 {  
-    uint8_t len; /* used */  
-    uint8_t alloc; /* excluding the header and null terminator */  
-    unsigned char flags; /* 3 lsb of type, 5 unused bits */  
-    char buf[];  
-};  
-struct __attribute__ ((__packed__)) sdshdr16 {  
-    uint16_t len; /* used */  
-    uint16_t alloc; /* excluding the header and null terminator */  
-    unsigned char flags; /* 3 lsb of type, 5 unused bits */  
-    char buf[];  
-};  
-struct __attribute__ ((__packed__)) sdshdr32 {  
-    uint32_t len; /* used */  
-    uint32_t alloc; /* excluding the header and null terminator */  
-    unsigned char flags; /* 3 lsb of type, 5 unused bits */  
-    char buf[];  
-};  
-struct __attribute__ ((__packed__)) sdshdr64 {  
-    uint64_t len; /* used */  
-    uint64_t alloc; /* excluding the header and null terminator */  
-    unsigned char flags; /* 3 lsb of type, 5 unused bits */  
-    char buf[];  
-};  
-</code></pre><p>SDS遵循C字符串以空字符串结尾的风格，空字符不计算在len中，但需要buf额外的一个字节，这使得SDS可以重用C字符串函数库的函数。</p>
-<h2 id="SDS与C字符串的对比"><a href="#SDS与C字符串的对比" class="headerlink" title="SDS与C字符串的对比"></a><strong>SDS与C字符串的对比</strong></h2><ol>
-<li>O(1)时间获取字符串长度<br>获取一个C字符串长度，必须遍历整个字符串，时间O(N)。<br>SDS在len中记录了字符串长度。</li>
-<li>缓冲器溢出<br>C字符串不记录自身长度，容易造成缓冲区溢出。  </li>
-<li>减少修改字符串造成的内存重分配<br>每次增长或缩短C字符串，程序都要对这个数组进行内存重分配。<br>通过未使用空间，SDS实现了空间预分配和惰性空间释放两种优化策略（vector也采用了这种思想）。<ol>
-<li>空间预分配：优化SDS字符串增长：<br>1） SDS修改后长度小于1MB，程序分配和len相同的未使用空间。buf的实际长度=2*len+1byte<br>2） 大于等于1MB，分配1MB未使用空间。buf=len+1MB+1byte</li>
-<li>惰性空间释放：优化SDS字符串缩短：当SDS缩短字符串时，程序并不使用内存重分配来收回多出的字节数，而是使用free记录。</li>
+        <h2 id="数组与链表"><a href="#数组与链表" class="headerlink" title="数组与链表"></a><strong>数组与链表</strong></h2><p>数组存储区间是连续的，占用内存严重。但数组的二分查找时间复杂度小，为O(logN)；数组的特点是：寻址容易，插入和删除困难；<br>链表存储区间离散，占用内存比较宽松，故空间复杂度很小，但查找的时间复杂度很大。链表的特点是：寻址困难，插入和删除容易。<br>哈希表综合两者的特性，做出一种寻址容易，插入删除也容易的数据结构。哈希表既满足了数据的查找方便，同时不占用太多的内容空间，使用也十分方便。</p>
+<h2 id="HashMap"><a href="#HashMap" class="headerlink" title="HashMap"></a><strong>HashMap</strong></h2><p>HashMap结构为链表数组，如下图：<br><img src="/img/HashMap1.jpg" alt="HashMap"><br><img src="/img/HashMap2.jpg" alt="HashMap"><br>哈希表是由数组+链表组成的，一个长度为16的数组中，每个元素存储的是一个链表的头结点。那么这些元素是按照什么样的规则存储到数组中呢。一般情况是通过hash(key)%len获得，也就是元素的key的哈希值对数组长度取模得到。比如上述哈希表中，12%16=12,28%16=12,108%16=12,140%16=12。所以12、28、108以及140都存储在数组下标为12的位置。<br>这就是使用了散列函数，将一个大的空间映射到一个大小可以接受的索引空间，使用hash function会带来元素碰撞问题：即不同元素映射到了同一位置。解决碰撞问题的方法有：  </p>
+<ol>
+<li>开放定址法（线性探测再散列，二次探测再散列，伪随机探测再散列）</li>
+<li>再哈希法</li>
+<li>链地址法 </li>
 </ol>
-</li>
-<li>二进制安全<br>C字符串字符必须符合某种编码，字符串中不能有空字符。这样就不能保存任意格式的二进制数据，比如图片、视频和音频。  </li>
-<li>兼容部分C字符串函数</li>
-</ol>
+<p>Java中hashmap的解决办法就是采用的链地址法。</p>
+<p>//HashMap Entry数组的初始大小，必须是2的幂<br>static final int DEFAULT_INITIAL_CAPACITY = 1&lt;&lt;4;//aka 16<br>在C++STL中以质数来设计表的大小，确保散列能够均匀分布，如果为非质数，很可能导致散列集中在几个数上。</p>
+<p>//当创建 HashMap 时，有一个默认的负载因子（load factor），其默认值为 0.75，这是时间和空间成本上一种折衷：增大负载因子可以减少 Hash 表（就是那个 Entry 数组）所占用的内存空间，但会增加查询数据的时间开销，而查询是最频繁的的操作（HashMap 的 get() 与 put() 方法都要用到查询）；减小负载因子会提高数据查询的性能，但会增加 Hash 表所占用的内存空间。<br>static final float DEFAULT_LOAD_FACTOR = 0.75f;</p>
+<p>HashMap的key和value都可以是null。</p>
 
       
 
@@ -234,7 +197,7 @@ struct __attribute__ ((__packed__)) sdshdr64 {
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">redis</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">java</a>
         		</li>
       		
 		</ul>
@@ -290,7 +253,7 @@ struct __attribute__ ((__packed__)) sdshdr64 {
     <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
     <p>扫一扫，分享到微信</p>
     <div class="wx-qrcode">
-      <img src="http://s.jiathis.com/qrcode.php?url=http://yoursite.com/2017/08/30/简单动态字符串/" alt="微信分享二维码">
+      <img src="http://s.jiathis.com/qrcode.php?url=http://yoursite.com/2017/09/01/HashMap/" alt="微信分享二维码">
     </div>
 </div>
 
@@ -304,18 +267,18 @@ struct __attribute__ ((__packed__)) sdshdr64 {
   
 <nav id="article-nav">
   
-    <a href="/2017/08/30/链表/" id="article-nav-newer" class="article-nav-link-wrap">
+    <a href="/2017/09/03/堆排序/" id="article-nav-newer" class="article-nav-link-wrap">
       <i class="icon-circle-left"></i>
       <div class="article-nav-title">
         
-          链表
+          堆排序
         
       </div>
     </a>
   
   
-    <a href="/2017/08/28/对象的共享/" id="article-nav-older" class="article-nav-link-wrap">
-      <div class="article-nav-title">对象的共享</div>
+    <a href="/2017/09/01/基础构建模块/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">基础构建模块</div>
       <i class="icon-circle-right"></i>
     </a>
   

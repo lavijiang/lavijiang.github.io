@@ -6,19 +6,19 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="http://yoursite.com">
-  <title>简单动态字符串 | lavi&#39;s Blog</title>
+  <title>堆排序 | lavi&#39;s Blog</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="C语言传统的字符串表示：以’\0’结束的字符序列。redis的默认字符串：简单动态字符串（simple dynamic string,SDS）。 SDS定义redis2.9   struct sdshdr{     //SDS保存字符串长度，等于buf数组已使用字节数     int len;     //buf数组未使用字节数     int free;     //字节数组，用于保存字符串">
-<meta name="keywords" content="redis">
+  <meta name="description" content="heapsort时间复杂度O(nlgn)，具有空间原址性：只需要常数个额外的元素空间存储临时数据。堆也可以用来构造优先队列，C++中的priority_queue（默认最大堆），java中的PriorityQueue（默认最小堆实现）。 维护堆的性质MAX-HEAPIFY（最大堆为例）:假定根节点为LEFT(i)和RIGHT(i)的二叉树都是最大堆，但是A[i]若小于其孩子，就破坏了最大堆性质。M">
+<meta name="keywords" content="algorithm,sort">
 <meta property="og:type" content="article">
-<meta property="og:title" content="简单动态字符串">
-<meta property="og:url" content="http://yoursite.com/2017/08/30/简单动态字符串/index.html">
+<meta property="og:title" content="堆排序">
+<meta property="og:url" content="http://yoursite.com/2017/09/03/堆排序/index.html">
 <meta property="og:site_name" content="lavi&#39;s Blog">
-<meta property="og:description" content="C语言传统的字符串表示：以’\0’结束的字符序列。redis的默认字符串：简单动态字符串（simple dynamic string,SDS）。 SDS定义redis2.9   struct sdshdr{     //SDS保存字符串长度，等于buf数组已使用字节数     int len;     //buf数组未使用字节数     int free;     //字节数组，用于保存字符串">
-<meta property="og:updated_time" content="2017-08-30T13:15:11.244Z">
+<meta property="og:description" content="heapsort时间复杂度O(nlgn)，具有空间原址性：只需要常数个额外的元素空间存储临时数据。堆也可以用来构造优先队列，C++中的priority_queue（默认最大堆），java中的PriorityQueue（默认最小堆实现）。 维护堆的性质MAX-HEAPIFY（最大堆为例）:假定根节点为LEFT(i)和RIGHT(i)的二叉树都是最大堆，但是A[i]若小于其孩子，就破坏了最大堆性质。M">
+<meta property="og:updated_time" content="2017-09-03T03:49:55.445Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="简单动态字符串">
-<meta name="twitter:description" content="C语言传统的字符串表示：以’\0’结束的字符序列。redis的默认字符串：简单动态字符串（simple dynamic string,SDS）。 SDS定义redis2.9   struct sdshdr{     //SDS保存字符串长度，等于buf数组已使用字节数     int len;     //buf数组未使用字节数     int free;     //字节数组，用于保存字符串">
+<meta name="twitter:title" content="堆排序">
+<meta name="twitter:description" content="heapsort时间复杂度O(nlgn)，具有空间原址性：只需要常数个额外的元素空间存储临时数据。堆也可以用来构造优先队列，C++中的priority_queue（默认最大堆），java中的PriorityQueue（默认最小堆实现）。 维护堆的性质MAX-HEAPIFY（最大堆为例）:假定根节点为LEFT(i)和RIGHT(i)的二叉树都是最大堆，但是A[i]若小于其孩子，就破坏了最大堆性质。M">
   
     <link rel="alternative" href="/atom.xml" title="lavi&#39;s Blog" type="application/atom+xml">
   
@@ -150,78 +150,94 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            <article id="post-简单动态字符串" class="article article-type-post " itemscope itemprop="blogPost">
+            <article id="post-堆排序" class="article article-type-post " itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
     <h1 class="article-title" itemprop="name">
-      简单动态字符串
+      堆排序
     </h1>
   
 
         
-        <a href="/2017/08/30/简单动态字符串/" class="archive-article-date">
-  	<time datetime="2017-08-30T03:43:03.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-08-30</time>
+        <a href="/2017/09/03/堆排序/" class="archive-article-date">
+  	<time datetime="2017-09-03T02:10:23.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-09-03</time>
 </a>
         
       </header>
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>C语言传统的字符串表示：以’\0’结束的字符序列。<br>redis的默认字符串：<strong>简单动态字符串（simple dynamic string,SDS）</strong>。</p>
-<h2 id="SDS定义"><a href="#SDS定义" class="headerlink" title="SDS定义"></a><strong>SDS定义</strong></h2><p>redis2.9  </p>
-<pre><code>struct sdshdr{
-    //SDS保存字符串长度，等于buf数组已使用字节数
-    int len;
-    //buf数组未使用字节数
-    int free;
-    //字节数组，用于保存字符串
-    char buf[];
-}；
-</code></pre><p>redis4.0.1</p>
-<pre><code>struct __attribute__ ((__packed__)) sdshdr5 {  
-    unsigned char flags; /* 3 lsb of type, and 5 msb of string length */  
-    char buf[];  
-};  
-struct __attribute__ ((__packed__)) sdshdr8 {  
-    uint8_t len; /* used */  
-    uint8_t alloc; /* excluding the header and null terminator */  
-    unsigned char flags; /* 3 lsb of type, 5 unused bits */  
-    char buf[];  
-};  
-struct __attribute__ ((__packed__)) sdshdr16 {  
-    uint16_t len; /* used */  
-    uint16_t alloc; /* excluding the header and null terminator */  
-    unsigned char flags; /* 3 lsb of type, 5 unused bits */  
-    char buf[];  
-};  
-struct __attribute__ ((__packed__)) sdshdr32 {  
-    uint32_t len; /* used */  
-    uint32_t alloc; /* excluding the header and null terminator */  
-    unsigned char flags; /* 3 lsb of type, 5 unused bits */  
-    char buf[];  
-};  
-struct __attribute__ ((__packed__)) sdshdr64 {  
-    uint64_t len; /* used */  
-    uint64_t alloc; /* excluding the header and null terminator */  
-    unsigned char flags; /* 3 lsb of type, 5 unused bits */  
-    char buf[];  
-};  
-</code></pre><p>SDS遵循C字符串以空字符串结尾的风格，空字符不计算在len中，但需要buf额外的一个字节，这使得SDS可以重用C字符串函数库的函数。</p>
-<h2 id="SDS与C字符串的对比"><a href="#SDS与C字符串的对比" class="headerlink" title="SDS与C字符串的对比"></a><strong>SDS与C字符串的对比</strong></h2><ol>
-<li>O(1)时间获取字符串长度<br>获取一个C字符串长度，必须遍历整个字符串，时间O(N)。<br>SDS在len中记录了字符串长度。</li>
-<li>缓冲器溢出<br>C字符串不记录自身长度，容易造成缓冲区溢出。  </li>
-<li>减少修改字符串造成的内存重分配<br>每次增长或缩短C字符串，程序都要对这个数组进行内存重分配。<br>通过未使用空间，SDS实现了空间预分配和惰性空间释放两种优化策略（vector也采用了这种思想）。<ol>
-<li>空间预分配：优化SDS字符串增长：<br>1） SDS修改后长度小于1MB，程序分配和len相同的未使用空间。buf的实际长度=2*len+1byte<br>2） 大于等于1MB，分配1MB未使用空间。buf=len+1MB+1byte</li>
-<li>惰性空间释放：优化SDS字符串缩短：当SDS缩短字符串时，程序并不使用内存重分配来收回多出的字节数，而是使用free记录。</li>
-</ol>
-</li>
-<li>二进制安全<br>C字符串字符必须符合某种编码，字符串中不能有空字符。这样就不能保存任意格式的二进制数据，比如图片、视频和音频。  </li>
-<li>兼容部分C字符串函数</li>
-</ol>
+        <p>heapsort时间复杂度O(nlgn)，具有空间原址性：只需要常数个额外的元素空间存储临时数据。堆也可以用来构造优先队列，C++中的priority_queue（默认最大堆），java中的PriorityQueue（默认最小堆实现）。</p>
+<h2 id="维护堆的性质"><a href="#维护堆的性质" class="headerlink" title="维护堆的性质"></a><strong>维护堆的性质</strong></h2><p>MAX-HEAPIFY（最大堆为例）:<br>假定根节点为LEFT(i)和RIGHT(i)的二叉树都是最大堆，但是A[i]若小于其孩子，就破坏了最大堆性质。MAX-HEAPIFY让A[i]的值在最大堆中逐级下降，使得以i为根节点的子树重新遵循最大堆性质，时间复杂度O(lgn)。 </p>
+<pre><code>MAX-HEAPIFY(A,i):
+l=LEFT(i)
+r=RIGHT(i)
+if l&lt;=A.heap-size and A[l]&gt;A[i]
+    largest=l
+else largest=i
+if r&lt;=A.heap-size and A[r]&gt;A[largest]
+    largest=r
+if largest!=i
+    exchange A[i] with A[largest]
+    MAX-HEAPIFY(A,largest)
+</code></pre><h2 id="建堆"><a href="#建堆" class="headerlink" title="建堆"></a><strong>建堆</strong></h2><p>采用自底向上的方式讲一个数组构建为最大堆：  </p>
+<pre><code>BUILD-MAX-HEAP(A):
+A.heap-size=A.length
+for i=⌊A.length/2⌋ downto 1
+    MAX-HEAPIFY(A,i)  
+</code></pre><h2 id="堆排序"><a href="#堆排序" class="headerlink" title="堆排序"></a><strong>堆排序</strong></h2><p>先将一个数组建成最大堆，将目前最大元素与要排列子数组的最后一个元素交换，然后再维护堆，不断重复这个过程即可：  </p>
+<pre><code>HEAP-SORT(A):
+BUILD-MAX-HEAP(A)
+for i=A.length downto 2
+    exchange A[i] with A[1]
+    A.heap-size=A.heap-size - 1
+    MAX-HEAPIFY(A,1)  
+</code></pre><p>java代码：</p>
+<pre><code>public class Heapsort {
+    public static void exchange(int[] A,int i,int j){
+        int tmp = A[i];
+        A[i] = A[j];
+        A[j] = tmp;
+    }
+    public static void maxHeapify(int[] A,int i,int size){
+        int l = i*2+1;
+        int r = i*2+2;
+        int large = i;
+        if(l&lt;=size &amp;&amp; A[l]&gt;A[i])
+            large = l;
+        if(r&lt;=size &amp;&amp; A[r]&gt;A[large])
+            large = r;
+        if(large!=i) {
+            exchange(A, large, i);
+            maxHeapify(A,large,size);
+        }
+    }
+    public static void buildMaxHeap(int[] A){
+        int len = A.length;
+        for(int i=len/2-1;i&gt;=0;i--)
+            maxHeapify(A,i,len-1);
+    }
+    public static void heapSort(int[] A){
+        buildMaxHeap(A);
+        int size = A.length-1;
+        for(int i=A.length-1;i&gt;0;i--){
+            exchange(A,i,0);
+            size = size-1;
+            maxHeapify(A,0,size);
+        }
+    }
 
+    public static void main(String[] args) {
+        int[] A =  {12,43,2,2,3,12,3,2,1};
+        heapSort(A);
+        for(int a:A)
+            System.out.println(a);
+    }
+}
+</code></pre>
       
 
       
@@ -234,7 +250,11 @@ struct __attribute__ ((__packed__)) sdshdr64 {
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">redis</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">algorithm</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">sort</a>
         		</li>
       		
 		</ul>
@@ -290,7 +310,7 @@ struct __attribute__ ((__packed__)) sdshdr64 {
     <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
     <p>扫一扫，分享到微信</p>
     <div class="wx-qrcode">
-      <img src="http://s.jiathis.com/qrcode.php?url=http://yoursite.com/2017/08/30/简单动态字符串/" alt="微信分享二维码">
+      <img src="http://s.jiathis.com/qrcode.php?url=http://yoursite.com/2017/09/03/堆排序/" alt="微信分享二维码">
     </div>
 </div>
 
@@ -304,18 +324,9 @@ struct __attribute__ ((__packed__)) sdshdr64 {
   
 <nav id="article-nav">
   
-    <a href="/2017/08/30/链表/" id="article-nav-newer" class="article-nav-link-wrap">
-      <i class="icon-circle-left"></i>
-      <div class="article-nav-title">
-        
-          链表
-        
-      </div>
-    </a>
   
-  
-    <a href="/2017/08/28/对象的共享/" id="article-nav-older" class="article-nav-link-wrap">
-      <div class="article-nav-title">对象的共享</div>
+    <a href="/2017/09/01/HashMap/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">HashMap</div>
       <i class="icon-circle-right"></i>
     </a>
   

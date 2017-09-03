@@ -147,6 +147,418 @@
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-堆排序" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2017/09/03/堆排序/">堆排序</a>
+    </h1>
+  
+
+        
+        <a href="/2017/09/03/堆排序/" class="archive-article-date">
+  	<time datetime="2017-09-03T02:10:23.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-09-03</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>heapsort时间复杂度O(nlgn)，具有空间原址性：只需要常数个额外的元素空间存储临时数据。堆也可以用来构造优先队列，C++中的priority_queue（默认最大堆），java中的PriorityQueue（默认最小堆实现）。</p>
+<h2 id="维护堆的性质"><a href="#维护堆的性质" class="headerlink" title="维护堆的性质"></a><strong>维护堆的性质</strong></h2><p>MAX-HEAPIFY（最大堆为例）:<br>假定根节点为LEFT(i)和RIGHT(i)的二叉树都是最大堆，但是A[i]若小于其孩子，就破坏了最大堆性质。MAX-HEAPIFY让A[i]的值在最大堆中逐级下降，使得以i为根节点的子树重新遵循最大堆性质，时间复杂度O(lgn)。 </p>
+<pre><code>MAX-HEAPIFY(A,i):
+l=LEFT(i)
+r=RIGHT(i)
+if l&lt;=A.heap-size and A[l]&gt;A[i]
+    largest=l
+else largest=i
+if r&lt;=A.heap-size and A[r]&gt;A[largest]
+    largest=r
+if largest!=i
+    exchange A[i] with A[largest]
+    MAX-HEAPIFY(A,largest)
+</code></pre><h2 id="建堆"><a href="#建堆" class="headerlink" title="建堆"></a><strong>建堆</strong></h2><p>采用自底向上的方式讲一个数组构建为最大堆：  </p>
+<pre><code>BUILD-MAX-HEAP(A):
+A.heap-size=A.length
+for i=⌊A.length/2⌋ downto 1
+    MAX-HEAPIFY(A,i)  
+</code></pre><h2 id="堆排序"><a href="#堆排序" class="headerlink" title="堆排序"></a><strong>堆排序</strong></h2><p>先将一个数组建成最大堆，将目前最大元素与要排列子数组的最后一个元素交换，然后再维护堆，不断重复这个过程即可：  </p>
+<pre><code>HEAP-SORT(A):
+BUILD-MAX-HEAP(A)
+for i=A.length downto 2
+    exchange A[i] with A[1]
+    A.heap-size=A.heap-size - 1
+    MAX-HEAPIFY(A,1)  
+</code></pre><p>java代码：</p>
+<pre><code>public class Heapsort {
+    public static void exchange(int[] A,int i,int j){
+        int tmp = A[i];
+        A[i] = A[j];
+        A[j] = tmp;
+    }
+    public static void maxHeapify(int[] A,int i,int size){
+        int l = i*2+1;
+        int r = i*2+2;
+        int large = i;
+        if(l&lt;=size &amp;&amp; A[l]&gt;A[i])
+            large = l;
+        if(r&lt;=size &amp;&amp; A[r]&gt;A[large])
+            large = r;
+        if(large!=i) {
+            exchange(A, large, i);
+            maxHeapify(A,large,size);
+        }
+    }
+    public static void buildMaxHeap(int[] A){
+        int len = A.length;
+        for(int i=len/2-1;i&gt;=0;i--)
+            maxHeapify(A,i,len-1);
+    }
+    public static void heapSort(int[] A){
+        buildMaxHeap(A);
+        int size = A.length-1;
+        for(int i=A.length-1;i&gt;0;i--){
+            exchange(A,i,0);
+            size = size-1;
+            maxHeapify(A,0,size);
+        }
+    }
+
+    public static void main(String[] args) {
+        int[] A =  {12,43,2,2,3,12,3,2,1};
+        heapSort(A);
+        for(int a:A)
+            System.out.println(a);
+    }
+}
+</code></pre>
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">algorithm</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">sort</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2017/09/03/堆排序/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-HashMap" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2017/09/01/HashMap/">HashMap</a>
+    </h1>
+  
+
+        
+        <a href="/2017/09/01/HashMap/" class="archive-article-date">
+  	<time datetime="2017-09-01T15:19:18.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-09-01</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="数组与链表"><a href="#数组与链表" class="headerlink" title="数组与链表"></a><strong>数组与链表</strong></h2><p>数组存储区间是连续的，占用内存严重。但数组的二分查找时间复杂度小，为O(logN)；数组的特点是：寻址容易，插入和删除困难；<br>链表存储区间离散，占用内存比较宽松，故空间复杂度很小，但查找的时间复杂度很大。链表的特点是：寻址困难，插入和删除容易。<br>哈希表综合两者的特性，做出一种寻址容易，插入删除也容易的数据结构。哈希表既满足了数据的查找方便，同时不占用太多的内容空间，使用也十分方便。</p>
+<h2 id="HashMap"><a href="#HashMap" class="headerlink" title="HashMap"></a><strong>HashMap</strong></h2><p>HashMap结构为链表数组，如下图：<br><img src="/img/HashMap1.jpg" alt="HashMap"><br><img src="/img/HashMap2.jpg" alt="HashMap"><br>哈希表是由数组+链表组成的，一个长度为16的数组中，每个元素存储的是一个链表的头结点。那么这些元素是按照什么样的规则存储到数组中呢。一般情况是通过hash(key)%len获得，也就是元素的key的哈希值对数组长度取模得到。比如上述哈希表中，12%16=12,28%16=12,108%16=12,140%16=12。所以12、28、108以及140都存储在数组下标为12的位置。<br>这就是使用了散列函数，将一个大的空间映射到一个大小可以接受的索引空间，使用hash function会带来元素碰撞问题：即不同元素映射到了同一位置。解决碰撞问题的方法有：  </p>
+<ol>
+<li>开放定址法（线性探测再散列，二次探测再散列，伪随机探测再散列）</li>
+<li>再哈希法</li>
+<li>链地址法 </li>
+</ol>
+<p>Java中hashmap的解决办法就是采用的链地址法。</p>
+<p>//HashMap Entry数组的初始大小，必须是2的幂<br>static final int DEFAULT_INITIAL_CAPACITY = 1&lt;&lt;4;//aka 16<br>在C++STL中以质数来设计表的大小，确保散列能够均匀分布，如果为非质数，很可能导致散列集中在几个数上。</p>
+<p>//当创建 HashMap 时，有一个默认的负载因子（load factor），其默认值为 0.75，这是时间和空间成本上一种折衷：增大负载因子可以减少 Hash 表（就是那个 Entry 数组）所占用的内存空间，但会增加查询数据的时间开销，而查询是最频繁的的操作（HashMap 的 get() 与 put() 方法都要用到查询）；减小负载因子会提高数据查询的性能，但会增加 Hash 表所占用的内存空间。<br>static final float DEFAULT_LOAD_FACTOR = 0.75f;</p>
+<p>HashMap的key和value都可以是null。</p>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">java</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2017/09/01/HashMap/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-基础构建模块" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2017/09/01/基础构建模块/">基础构建模块</a>
+    </h1>
+  
+
+        
+        <a href="/2017/09/01/基础构建模块/" class="archive-article-date">
+  	<time datetime="2017-09-01T01:54:57.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-09-01</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="Synchronized-Collections-同步容器类"><a href="#Synchronized-Collections-同步容器类" class="headerlink" title="Synchronized Collections(同步容器类)"></a><strong>Synchronized Collections(同步容器类)</strong></h2><p>同步容器类包括了Vector和Hashtable，是早期JDK的一部分，另外在JDK1.2引入了同步封装类，采用了Collections.synchronizedXxx等工厂方法。将它们的状态封装，并对每个公有方法进行同步。<br>线程安全问题：<br>同步容器虽然线程安全，但是在多线程情况下进行一些符合操作时需要额外的客户端加锁。这种方式可以解决不可靠迭代问题，但是会导致其他线程在迭代期间无法访问它，降低了并发性。例如：  </p>
+<pre><code>for(int i=0;i&lt;vector.size();i++)
+    doSomething(vector.get(i));
+</code></pre><p>在调用size和get之间，Vector的长度可能发生了改变，可能抛出ArrayIndexOutOfBoundsException。客户端加锁后：</p>
+<pre><code>synchronized(vector){
+    for(int i=0;i&lt;vector.size();i++)
+        doSomething(vector.get(i));
+}
+</code></pre><h2 id="迭代器的fail-fast机制"><a href="#迭代器的fail-fast机制" class="headerlink" title="迭代器的fail-fast机制"></a><strong>迭代器的fail-fast机制</strong></h2><p>同步容器类进行迭代的标准方式是使用Iterator。如果当它发现容器在迭代过程中被修改，将抛出ConcurrentModificationException异常。这就是fail-fast（及时失败）机制。<br>虽然可以在迭代过程中对容器加锁来解决并发问题，但是会导致死锁、降低吞吐量和CPU利用率等问题。还有一种克隆容器方法，在容器很大时，将带来一定的性能开销。</p>
+<h2 id="ConcurrentHashMap"><a href="#ConcurrentHashMap" class="headerlink" title="ConcurrentHashMap"></a><strong>ConcurrentHashMap</strong></h2><p>ConcurrentHashMap和HashMap一样，也是基于散列的Map，使用一种粒度更细的加锁机制——分段锁（lock striping）来实现更大程度的共享：任意数量的读取线程可以并发访问Map，读取线程和写入线程可以并发访问Map，一定数量的写入线程可以并发修改Map。在并发访问环境下将实现更高的吞吐量，在单线程环境下只损失非常小的性能。  </p>
+<p>1.设计思路<br>ConcurrentHashMap内部使用Segment数组，类似于HashMap（JDK7与JDK8中HashMap的实现）的结构，即内部拥有一个Entry数组，数组中的每个元素又是一个链表；同时又是一个ReentrantLock（Segment继承了ReentrantLock）。ConcurrentHashMap中的HashEntry相对于HashMap中的Entry有一定的差异性：HashEntry中的value以及next都被volatile修饰，这样在多线程读写过程中能够保持它们的可见性，代码如下：</p>
+<pre><code>static final class HashEntry&lt;K,V&gt; {
+    final int hash;
+    final K key;
+    volatile V value;
+    volatile HashEntry&lt;K,V&gt; next;
+}
+</code></pre><p>2.Unsafe与CAS<br>在ConcurrentHashMap中，随处可以看到U, 大量使用了U.compareAndSwapXXX的方法，这个方法是利用一个CAS算法实现无锁化的修改值的操作，他可以大大降低锁代理的性能消耗。这个算法的基本思想就是不断地去比较当前内存中的变量值与你指定的一个变量值是否相等，如果相等，则接受你指定的修改的值，否则拒绝你的操作。因为当前线程中的值已经不是最新的值，你的修改很可能会覆盖掉其他线程修改的结果。这一点与乐观锁，SVN的思想是比较类似的。</p>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">concurrency</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2017/09/01/基础构建模块/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-spring的AOP" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2017/08/31/spring的AOP/">Spring的AOP</a>
+    </h1>
+  
+
+        
+        <a href="/2017/08/31/spring的AOP/" class="archive-article-date">
+  	<time datetime="2017-08-31T02:55:50.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-08-31</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>AOP(Aspect Oriented Programming)，即面向切面编程。AOP和OOP互为补充，OOP从静态角度将程序分解成各个层次的对象，而AOP从动态角度将程序运行过程分解成各个切面。</p>
+<h2 id="AOP优点"><a href="#AOP优点" class="headerlink" title="AOP优点"></a><strong>AOP优点</strong></h2><ol>
+<li>降低模块之间的耦合</li>
+<li>使系统容易扩展</li>
+<li>更好的代码复用  </li>
+</ol>
+<p>AOP专门用于处理系统中分布于各个模块中的交叉关注点，不用修改对应的业务逻辑组件。JavaEE中，经常使用AOP处理一些具有横切性质的系统级服务，如事务管理、安全检查、缓存、对象池管理等。</p>
+<h2 id="AOP实现"><a href="#AOP实现" class="headerlink" title="AOP实现"></a><strong>AOP实现</strong></h2><ol>
+<li>静态AOP：AOP框架在编译阶段对程序进行修改，生成静态的AOP代理类，class文件会被修改，需要使用特定编译器，如AspectJ。</li>
+<li>动态AOP：AOP框架在运行阶段动态生成AOP代理，以Spring AOP为代表。</li>
+</ol>
+<h2 id="AOP的基本概念"><a href="#AOP的基本概念" class="headerlink" title="AOP的基本概念"></a><strong>AOP的基本概念</strong></h2><ul>
+<li>切面（Aspect）：用于组织多个Advice，Advice在切面中定义</li>
+<li>连接点（Joinpoint）：程序执行过程中明确的点，如方法的调用，或者异常的抛出。Spring AOP中，连接点总是方法的调用</li>
+<li>增强处理（Advice）：AOP框架在特定的切入点执行的增强处理。有“around”、“before”和“after”类型。</li>
+<li>切入点（Pointcut）：可以插入增强处理的连接点。</li>
+<li>引入：将方法或字段添加到被处理的类中。</li>
+<li>AOP代理：AOP框架创建的对象，代理就是对目标对象的增强。Spring中的AOP代理可以是JDK动态代理，也可以是cglib代理。前者为实现接口的目标对象的代理，后者为不实现接口的目标对象的代理。</li>
+<li>织入（Weaving）：将增强处理添加到目标对象中，并创建一个被增强的对象（AOP代理）的过程。</li>
+</ul>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">Spring</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2017/08/31/spring的AOP/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-字典" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -568,22 +980,22 @@ struct __attribute__ ((__packed__)) sdshdr64 {
 </ul>
 <h2 id="创建Bean的3种方式"><a href="#创建Bean的3种方式" class="headerlink" title="创建Bean的3种方式"></a><strong>创建Bean的3种方式</strong></h2><ol>
 <li>使用构造器创建Bean实例</li>
-<li>使用静态工厂方法创建Bean<br>采用静态工厂方法创建Bean实例时，<bean>元素需要指定如下两个属性：      <ol>
+<li>使用静态工厂方法创建Bean<br>采用静态工厂方法创建Bean实例时，<bean>元素需要指定如下两个属性：<ol>
 <li>class：该属性的值为静态工厂类的类名</li>
 <li>factory-method：该属性指定静态工厂方法来生产Bean实例</li>
 </ol>
 </bean></li>
-<li>使用实例工厂方法创建Bean<br>采用静态工厂方法创建Bean实例时，<bean>元素需要指定如下两个属性：      <ol>
+<li>使用实例工厂方法创建Bean<br>采用静态工厂方法创建Bean实例时，<bean>元素需要指定如下两个属性：<ol>
 <li>factory-bean：该属性的值为工厂Bean的id</li>
 <li>factory-method：该属性指定实例工厂的工厂方法  </li>
 </ol>
 </bean></li>
 </ol>
-<p>实例工厂与静态工厂区别：</p>
-<ul>
-<li>配置实例工厂方法创建Bean，必须将实例工厂配置成Bean实例</li>
+<p>实例工厂与静态工厂区别：  </p>
+<ol>
+<li>配置实例工厂方法创建Bean，必须将实例工厂配置成Bean实例  </li>
 <li>配置实例工厂方法创建Bean，必须使用factory-bean属性确定工厂Bean；而配置静态工厂方法创建Bean，使用class元素确定静态工厂类</li>
-</ul>
+</ol>
 <h2 id="Spring中Bean的生命周期"><a href="#Spring中Bean的生命周期" class="headerlink" title="Spring中Bean的生命周期"></a><strong>Spring中Bean的生命周期</strong></h2><p><img src="/img/spring-bean.jpg" alt="Bean Life Cycle in Spring Framwork">  </p>
 <ol>
 <li>实例化一个Bean，也就是我们通常说的new</li>
@@ -747,290 +1159,10 @@ struct __attribute__ ((__packed__)) sdshdr64 {
 
 
   
-    <article id="post-JSP-Servlet技术详解" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
   
-    <h1 itemprop="name">
-      <a class="article-title" href="/2017/08/28/JSP-Servlet技术详解/">JSP/Servlet技术详解</a>
-    </h1>
-  
-
-        
-        <a href="/2017/08/28/JSP-Servlet技术详解/" class="archive-article-date">
-  	<time datetime="2017-08-28T02:16:01.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-08-28</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>JSP(java server page)和Servlet是Java EE的两个基本成员，本质一样，JSP最终必须编译成Servlet才能运行。<br>JSP特点是在HTML页面嵌入Java代码，或使用JSP标签，包括用户自定义标签，动态呈现网页（作为表现层，而不作为逻辑组件和持久层组件）。</p>
-<p>#JSP</p>
-<h2 id="JSP内容"><a href="#JSP内容" class="headerlink" title="JSP内容"></a><strong>JSP内容</strong></h2><ul>
-<li>静态部分：标准的HTML标签、静态页面内容  </li>
-<li>动态部分：Java脚本，放在&lt;%和%&gt;之间</li>
-</ul>
-<h2 id="JSP的3个编译指令"><a href="#JSP的3个编译指令" class="headerlink" title="JSP的3个编译指令"></a><strong>JSP的3个编译指令</strong></h2><ul>
-<li>page：针对当前页面指令 </li>
-<li>include：指定包含另一个页面（静态引入）  </li>
-<li>taglib：用于定义和访问自定义标签</li>
-</ul>
-<h2 id="JSP的7个动作指令"><a href="#JSP的7个动作指令" class="headerlink" title="JSP的7个动作指令"></a><strong>JSP的7个动作指令</strong></h2><ul>
-<li>jsp:forward ：执行页面转向（仍然是一次请求，请求地址不会改变） </li>
-<li>jsp:param ：传递参数  </li>
-<li>jsp:include ：动态引入jsp页面（动态导入使用include方法引入被导入页面的内容，被导入页面的编译指令失去作用，还可以包含额外的参数）  </li>
-<li>jsp:plugin ：用于下载JavaBean或Applet到客户端执行</li>
-<li>jsp:useBean： 创建一个JavaBean实例  </li>
-<li>jsp:setProperty： 设置JavaBean实例的属性值  </li>
-<li>jsp:getProperty： 输出JavaBean实例的属性值  </li>
-</ul>
-<h2 id="JSP脚本的9个内置对象"><a href="#JSP脚本的9个内置对象" class="headerlink" title="JSP脚本的9个内置对象"></a><strong>JSP脚本的9个内置对象</strong></h2><ul>
-<li>application：javax.servlet.ServletContext的实例，代表jsp所属的Web应用本身 </li>
-<li>config：javax.servlet.ServletConfig的实例，代表该jsp的配置信息 </li>
-<li>exception：java.lang.Throwable的实例，代表其他页面中的异常和错误  </li>
-<li>out: javax.servlet.jsp.JspWriter的实例，输出流，用于形成HTML页面</li>
-<li>page：代表页面本身，可用this替代  </li>
-<li>pageContext：javax.servlet.jsp.PageContext的实例，代表JSP页面上下文，可用来访问页面中的共享数据</li>
-<li>request：javax.servlet.http.HttpServletRequest的实例，封装了客户端的请求参数  </li>
-<li>response：javax.servlet.http.HttpServletResponse的实例，代表服务器对客户端的响应，常用于重定向</li>
-<li>session: javax.servlet.http.HttpSession的实例，代表一次会话</li>
-</ul>
-<p>#Servlet</p>
-<h2 id="Servlet简介"><a href="#Servlet简介" class="headerlink" title="Servlet简介"></a><strong>Servlet简介</strong></h2><p>Servlet是运行在服务器端的小程序，用于处理及响应客户端的请求，它是个特殊的Java类，必须继承HttpServlet。  </p>
-<ul>
-<li>doGet：用于响应客户端的GET请求</li>
-<li>doPost：POST请求</li>
-<li>doPut：PUT请求</li>
-<li>doDelete：DELETE请求</li>
-</ul>
-<h2 id="JSP-Servlet生命周期"><a href="#JSP-Servlet生命周期" class="headerlink" title="JSP/Servlet生命周期"></a><strong>JSP/Servlet生命周期</strong></h2><ol>
-<li>初始化阶段：Web容器调用Servlet的init()方法，对Servlet进行初始化，只调用一次  </li>
-<li>响应客户请求阶段：调用service()方法响应客户请求</li>
-<li>终止阶段：调用destroy()方法销毁Servlet</li>
-</ol>
-<h2 id="标准的MVC模式"><a href="#标准的MVC模式" class="headerlink" title="标准的MVC模式"></a><strong>标准的MVC模式</strong></h2><ul>
-<li>View：使用JSP，作用：  <ul>
-<li>收集用户请求参数  </li>
-<li>将处理结果返回给用户</li>
-</ul>
-</li>
-<li>Controller：使用Servlet：所有用户请求发送给Servlet，Servlet调用Model来处理用户请求，并调用JSP来呈现处理结果；或者Servlet直接调用JSP将状态数据呈现。</li>
-<li>Model：JavaBean，所有的业务逻辑、数据访问逻辑都在Model中实现。</li>
-</ul>
-<h2 id="Filter"><a href="#Filter" class="headerlink" title="Filter"></a><strong>Filter</strong></h2><p>加强版的Servlet，起过滤作用：Filter对请求进行预处理，将请求交给Servlet处理，最后对响应进行后处理。<br>创建Filter必须实现javax.servlet.Filter接口，有如下方法:  </p>
-<ul>
-<li>void init(FilterConfig config)：初始化</li>
-<li>void doFilter(ServletRequest req,ServletResponse res,FilterChain chain)：实现过滤功能</li>
-<li>void destroy()：用于Filter销毁前，完成资源回收 </li>
-</ul>
-<h2 id="Listener"><a href="#Listener" class="headerlink" title="Listener"></a><strong>Listener</strong></h2><p>Servlet提供了大量监听器来监听Web应用的内部事件，从而允许当Web内部事件发生时回调事件监听器内的方法。  </p>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">java</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2017/08/28/JSP-Servlet技术详解/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-线程安全性" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2017/08/27/线程安全性/">线程安全性</a>
-    </h1>
-  
-
-        
-        <a href="/2017/08/27/线程安全性/" class="archive-article-date">
-  	<time datetime="2017-08-27T07:50:58.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-08-27</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>线程安全的代码核心在于对<strong>共享(Shared)</strong>和<strong>可变(Mutable)</strong>状态的访问</p>
-<p>共享：变量可以被多个线程同时访问<br>可变：变量的值在生命周期内可以发生变化</p>
-<h2 id="线程安全的定义"><a href="#线程安全的定义" class="headerlink" title="线程安全的定义"></a><strong>线程安全的定义</strong></h2><p>当多个线程访问某个类，不管运行时环境采用何种调度方式或者这些线程如何交替执行，并且在主调代码中不需要额外的同步或协同，这个类都能表现正确的行为。</p>
-<p><em>无状态对象一定线程安全</em></p>
-<h2 id="原子性-atomic"><a href="#原子性-atomic" class="headerlink" title="原子性(atomic)"></a><strong>原子性(atomic)</strong></h2><p>竞态条件</p>
-<h2 id="加锁机制"><a href="#加锁机制" class="headerlink" title="加锁机制"></a><strong>加锁机制</strong></h2><p><strong>内置锁(同步锁、互斥锁)</strong>：java提供同步代码块(Synchronized Block)支持原子性，包括锁的对象引用和锁保护的代码块，性能低。<br>&gt;<br>    synchronized(lock){<br>    }</p>
-<p><strong>重入</strong>：内置锁可重入，即线程可以获得它自己持有的锁。实现方法是为每个锁关联一个获取计数值和一个所有者线程。  </p>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">concurrency</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2017/08/27/线程安全性/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-hello-world" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2017/08/27/hello-world/">Hello World</a>
-    </h1>
-  
-
-        
-        <a href="/2017/08/27/hello-world/" class="archive-article-date">
-  	<time datetime="2017-08-27T07:02:46.436Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-08-27</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>Welcome to <a href="https://hexo.io/" target="_blank" rel="external">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/" target="_blank" rel="external">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html" target="_blank" rel="external">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues" target="_blank" rel="external">GitHub</a>.</p>
-<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ hexo new <span class="string">"My New Post"</span></div></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/writing.html" target="_blank" rel="external">Writing</a></p>
-<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ hexo server</div></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/server.html" target="_blank" rel="external">Server</a></p>
-<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ hexo generate</div></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/generating.html" target="_blank" rel="external">Generating</a></p>
-<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ hexo deploy</div></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/deployment.html" target="_blank" rel="external">Deployment</a></p>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2017/08/27/hello-world/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
+    <nav id="page-nav">
+      <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="extend next" rel="next" href="/page/2/">Next &raquo;</a>
+    </nav>
   
 
 
@@ -1116,15 +1248,23 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
           <ul class="article-tag-list" q-show="showTags">
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">Spring</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">java</a>
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">Spring</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">concurrency</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">algorithm</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">sort</a>
               </li>
              
               <li class="article-tag-list-item">

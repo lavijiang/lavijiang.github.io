@@ -6,19 +6,19 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="http://yoursite.com">
-  <title>简单动态字符串 | lavi&#39;s Blog</title>
+  <title>Spring的AOP | lavi&#39;s Blog</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="C语言传统的字符串表示：以’\0’结束的字符序列。redis的默认字符串：简单动态字符串（simple dynamic string,SDS）。 SDS定义redis2.9   struct sdshdr{     //SDS保存字符串长度，等于buf数组已使用字节数     int len;     //buf数组未使用字节数     int free;     //字节数组，用于保存字符串">
-<meta name="keywords" content="redis">
+  <meta name="description" content="AOP(Aspect Oriented Programming)，即面向切面编程。AOP和OOP互为补充，OOP从静态角度将程序分解成各个层次的对象，而AOP从动态角度将程序运行过程分解成各个切面。 AOP优点 降低模块之间的耦合 使系统容易扩展 更好的代码复用    AOP专门用于处理系统中分布于各个模块中的交叉关注点，不用修改对应的业务逻辑组件。JavaEE中，经常使用AOP处理一些具有横切性">
+<meta name="keywords" content="Spring">
 <meta property="og:type" content="article">
-<meta property="og:title" content="简单动态字符串">
-<meta property="og:url" content="http://yoursite.com/2017/08/30/简单动态字符串/index.html">
+<meta property="og:title" content="Spring的AOP">
+<meta property="og:url" content="http://yoursite.com/2017/08/31/spring的AOP/index.html">
 <meta property="og:site_name" content="lavi&#39;s Blog">
-<meta property="og:description" content="C语言传统的字符串表示：以’\0’结束的字符序列。redis的默认字符串：简单动态字符串（simple dynamic string,SDS）。 SDS定义redis2.9   struct sdshdr{     //SDS保存字符串长度，等于buf数组已使用字节数     int len;     //buf数组未使用字节数     int free;     //字节数组，用于保存字符串">
-<meta property="og:updated_time" content="2017-08-30T13:15:11.244Z">
+<meta property="og:description" content="AOP(Aspect Oriented Programming)，即面向切面编程。AOP和OOP互为补充，OOP从静态角度将程序分解成各个层次的对象，而AOP从动态角度将程序运行过程分解成各个切面。 AOP优点 降低模块之间的耦合 使系统容易扩展 更好的代码复用    AOP专门用于处理系统中分布于各个模块中的交叉关注点，不用修改对应的业务逻辑组件。JavaEE中，经常使用AOP处理一些具有横切性">
+<meta property="og:updated_time" content="2017-08-31T10:42:45.545Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="简单动态字符串">
-<meta name="twitter:description" content="C语言传统的字符串表示：以’\0’结束的字符序列。redis的默认字符串：简单动态字符串（simple dynamic string,SDS）。 SDS定义redis2.9   struct sdshdr{     //SDS保存字符串长度，等于buf数组已使用字节数     int len;     //buf数组未使用字节数     int free;     //字节数组，用于保存字符串">
+<meta name="twitter:title" content="Spring的AOP">
+<meta name="twitter:description" content="AOP(Aspect Oriented Programming)，即面向切面编程。AOP和OOP互为补充，OOP从静态角度将程序分解成各个层次的对象，而AOP从动态角度将程序运行过程分解成各个切面。 AOP优点 降低模块之间的耦合 使系统容易扩展 更好的代码复用    AOP专门用于处理系统中分布于各个模块中的交叉关注点，不用修改对应的业务逻辑组件。JavaEE中，经常使用AOP处理一些具有横切性">
   
     <link rel="alternative" href="/atom.xml" title="lavi&#39;s Blog" type="application/atom+xml">
   
@@ -150,77 +150,46 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            <article id="post-简单动态字符串" class="article article-type-post " itemscope itemprop="blogPost">
+            <article id="post-spring的AOP" class="article article-type-post " itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
     <h1 class="article-title" itemprop="name">
-      简单动态字符串
+      Spring的AOP
     </h1>
   
 
         
-        <a href="/2017/08/30/简单动态字符串/" class="archive-article-date">
-  	<time datetime="2017-08-30T03:43:03.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-08-30</time>
+        <a href="/2017/08/31/spring的AOP/" class="archive-article-date">
+  	<time datetime="2017-08-31T02:55:50.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-08-31</time>
 </a>
         
       </header>
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>C语言传统的字符串表示：以’\0’结束的字符序列。<br>redis的默认字符串：<strong>简单动态字符串（simple dynamic string,SDS）</strong>。</p>
-<h2 id="SDS定义"><a href="#SDS定义" class="headerlink" title="SDS定义"></a><strong>SDS定义</strong></h2><p>redis2.9  </p>
-<pre><code>struct sdshdr{
-    //SDS保存字符串长度，等于buf数组已使用字节数
-    int len;
-    //buf数组未使用字节数
-    int free;
-    //字节数组，用于保存字符串
-    char buf[];
-}；
-</code></pre><p>redis4.0.1</p>
-<pre><code>struct __attribute__ ((__packed__)) sdshdr5 {  
-    unsigned char flags; /* 3 lsb of type, and 5 msb of string length */  
-    char buf[];  
-};  
-struct __attribute__ ((__packed__)) sdshdr8 {  
-    uint8_t len; /* used */  
-    uint8_t alloc; /* excluding the header and null terminator */  
-    unsigned char flags; /* 3 lsb of type, 5 unused bits */  
-    char buf[];  
-};  
-struct __attribute__ ((__packed__)) sdshdr16 {  
-    uint16_t len; /* used */  
-    uint16_t alloc; /* excluding the header and null terminator */  
-    unsigned char flags; /* 3 lsb of type, 5 unused bits */  
-    char buf[];  
-};  
-struct __attribute__ ((__packed__)) sdshdr32 {  
-    uint32_t len; /* used */  
-    uint32_t alloc; /* excluding the header and null terminator */  
-    unsigned char flags; /* 3 lsb of type, 5 unused bits */  
-    char buf[];  
-};  
-struct __attribute__ ((__packed__)) sdshdr64 {  
-    uint64_t len; /* used */  
-    uint64_t alloc; /* excluding the header and null terminator */  
-    unsigned char flags; /* 3 lsb of type, 5 unused bits */  
-    char buf[];  
-};  
-</code></pre><p>SDS遵循C字符串以空字符串结尾的风格，空字符不计算在len中，但需要buf额外的一个字节，这使得SDS可以重用C字符串函数库的函数。</p>
-<h2 id="SDS与C字符串的对比"><a href="#SDS与C字符串的对比" class="headerlink" title="SDS与C字符串的对比"></a><strong>SDS与C字符串的对比</strong></h2><ol>
-<li>O(1)时间获取字符串长度<br>获取一个C字符串长度，必须遍历整个字符串，时间O(N)。<br>SDS在len中记录了字符串长度。</li>
-<li>缓冲器溢出<br>C字符串不记录自身长度，容易造成缓冲区溢出。  </li>
-<li>减少修改字符串造成的内存重分配<br>每次增长或缩短C字符串，程序都要对这个数组进行内存重分配。<br>通过未使用空间，SDS实现了空间预分配和惰性空间释放两种优化策略（vector也采用了这种思想）。<ol>
-<li>空间预分配：优化SDS字符串增长：<br>1） SDS修改后长度小于1MB，程序分配和len相同的未使用空间。buf的实际长度=2*len+1byte<br>2） 大于等于1MB，分配1MB未使用空间。buf=len+1MB+1byte</li>
-<li>惰性空间释放：优化SDS字符串缩短：当SDS缩短字符串时，程序并不使用内存重分配来收回多出的字节数，而是使用free记录。</li>
+        <p>AOP(Aspect Oriented Programming)，即面向切面编程。AOP和OOP互为补充，OOP从静态角度将程序分解成各个层次的对象，而AOP从动态角度将程序运行过程分解成各个切面。</p>
+<h2 id="AOP优点"><a href="#AOP优点" class="headerlink" title="AOP优点"></a><strong>AOP优点</strong></h2><ol>
+<li>降低模块之间的耦合</li>
+<li>使系统容易扩展</li>
+<li>更好的代码复用  </li>
 </ol>
-</li>
-<li>二进制安全<br>C字符串字符必须符合某种编码，字符串中不能有空字符。这样就不能保存任意格式的二进制数据，比如图片、视频和音频。  </li>
-<li>兼容部分C字符串函数</li>
+<p>AOP专门用于处理系统中分布于各个模块中的交叉关注点，不用修改对应的业务逻辑组件。JavaEE中，经常使用AOP处理一些具有横切性质的系统级服务，如事务管理、安全检查、缓存、对象池管理等。</p>
+<h2 id="AOP实现"><a href="#AOP实现" class="headerlink" title="AOP实现"></a><strong>AOP实现</strong></h2><ol>
+<li>静态AOP：AOP框架在编译阶段对程序进行修改，生成静态的AOP代理类，class文件会被修改，需要使用特定编译器，如AspectJ。</li>
+<li>动态AOP：AOP框架在运行阶段动态生成AOP代理，以Spring AOP为代表。</li>
 </ol>
+<h2 id="AOP的基本概念"><a href="#AOP的基本概念" class="headerlink" title="AOP的基本概念"></a><strong>AOP的基本概念</strong></h2><ul>
+<li>切面（Aspect）：用于组织多个Advice，Advice在切面中定义</li>
+<li>连接点（Joinpoint）：程序执行过程中明确的点，如方法的调用，或者异常的抛出。Spring AOP中，连接点总是方法的调用</li>
+<li>增强处理（Advice）：AOP框架在特定的切入点执行的增强处理。有“around”、“before”和“after”类型。</li>
+<li>切入点（Pointcut）：可以插入增强处理的连接点。</li>
+<li>引入：将方法或字段添加到被处理的类中。</li>
+<li>AOP代理：AOP框架创建的对象，代理就是对目标对象的增强。Spring中的AOP代理可以是JDK动态代理，也可以是cglib代理。前者为实现接口的目标对象的代理，后者为不实现接口的目标对象的代理。</li>
+<li>织入（Weaving）：将增强处理添加到目标对象中，并创建一个被增强的对象（AOP代理）的过程。</li>
+</ul>
 
       
 
@@ -234,7 +203,7 @@ struct __attribute__ ((__packed__)) sdshdr64 {
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">redis</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">Spring</a>
         		</li>
       		
 		</ul>
@@ -290,7 +259,7 @@ struct __attribute__ ((__packed__)) sdshdr64 {
     <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
     <p>扫一扫，分享到微信</p>
     <div class="wx-qrcode">
-      <img src="http://s.jiathis.com/qrcode.php?url=http://yoursite.com/2017/08/30/简单动态字符串/" alt="微信分享二维码">
+      <img src="http://s.jiathis.com/qrcode.php?url=http://yoursite.com/2017/08/31/spring的AOP/" alt="微信分享二维码">
     </div>
 </div>
 
@@ -304,18 +273,18 @@ struct __attribute__ ((__packed__)) sdshdr64 {
   
 <nav id="article-nav">
   
-    <a href="/2017/08/30/链表/" id="article-nav-newer" class="article-nav-link-wrap">
+    <a href="/2017/09/01/基础构建模块/" id="article-nav-newer" class="article-nav-link-wrap">
       <i class="icon-circle-left"></i>
       <div class="article-nav-title">
         
-          链表
+          基础构建模块
         
       </div>
     </a>
   
   
-    <a href="/2017/08/28/对象的共享/" id="article-nav-older" class="article-nav-link-wrap">
-      <div class="article-nav-title">对象的共享</div>
+    <a href="/2017/08/30/字典/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">字典</div>
       <i class="icon-circle-right"></i>
     </a>
   
