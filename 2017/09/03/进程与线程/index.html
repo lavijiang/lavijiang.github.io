@@ -6,19 +6,15 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="http://yoursite.com">
-  <title>基础构建模块 | lavi&#39;s Blog</title>
+  <title>进程与线程 | lavi&#39;s Blog</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="Synchronized Collections(同步容器类)同步容器类包括了Vector和Hashtable，是早期JDK的一部分，另外在JDK1.2引入了同步封装类，采用了Collections.synchronizedXxx等工厂方法。将它们的状态封装，并对每个公有方法进行同步。线程安全问题：同步容器虽然线程安全，但是在多线程情况下进行一些符合操作时需要额外的客户端加锁。这种方式可以解决不可">
-<meta name="keywords" content="concurrency">
-<meta property="og:type" content="article">
-<meta property="og:title" content="基础构建模块">
-<meta property="og:url" content="http://yoursite.com/2017/09/01/基础构建模块/index.html">
+  <meta property="og:type" content="article">
+<meta property="og:title" content="进程与线程">
+<meta property="og:url" content="http://yoursite.com/2017/09/03/进程与线程/index.html">
 <meta property="og:site_name" content="lavi&#39;s Blog">
-<meta property="og:description" content="Synchronized Collections(同步容器类)同步容器类包括了Vector和Hashtable，是早期JDK的一部分，另外在JDK1.2引入了同步封装类，采用了Collections.synchronizedXxx等工厂方法。将它们的状态封装，并对每个公有方法进行同步。线程安全问题：同步容器虽然线程安全，但是在多线程情况下进行一些符合操作时需要额外的客户端加锁。这种方式可以解决不可">
-<meta property="og:updated_time" content="2017-09-01T09:16:54.221Z">
+<meta property="og:updated_time" content="2017-09-03T09:17:54.780Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="基础构建模块">
-<meta name="twitter:description" content="Synchronized Collections(同步容器类)同步容器类包括了Vector和Hashtable，是早期JDK的一部分，另外在JDK1.2引入了同步封装类，采用了Collections.synchronizedXxx等工厂方法。将它们的状态封装，并对每个公有方法进行同步。线程安全问题：同步容器虽然线程安全，但是在多线程情况下进行一些符合操作时需要额外的客户端加锁。这种方式可以解决不可">
+<meta name="twitter:title" content="进程与线程">
   
     <link rel="alternative" href="/atom.xml" title="lavi&#39;s Blog" type="application/atom+xml">
   
@@ -150,45 +146,27 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            <article id="post-基础构建模块" class="article article-type-post " itemscope itemprop="blogPost">
+            <article id="post-进程与线程" class="article article-type-post " itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
     <h1 class="article-title" itemprop="name">
-      基础构建模块
+      进程与线程
     </h1>
   
 
         
-        <a href="/2017/09/01/基础构建模块/" class="archive-article-date">
-  	<time datetime="2017-09-01T01:54:57.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-09-01</time>
+        <a href="/2017/09/03/进程与线程/" class="archive-article-date">
+  	<time datetime="2017-09-03T09:17:54.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-09-03</time>
 </a>
         
       </header>
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h2 id="Synchronized-Collections-同步容器类"><a href="#Synchronized-Collections-同步容器类" class="headerlink" title="Synchronized Collections(同步容器类)"></a><strong>Synchronized Collections(同步容器类)</strong></h2><p>同步容器类包括了Vector和Hashtable，是早期JDK的一部分，另外在JDK1.2引入了同步封装类，采用了Collections.synchronizedXxx等工厂方法。将它们的状态封装，并对每个公有方法进行同步。<br>线程安全问题：<br>同步容器虽然线程安全，但是在多线程情况下进行一些符合操作时需要额外的客户端加锁。这种方式可以解决不可靠迭代问题，但是会导致其他线程在迭代期间无法访问它，降低了并发性。例如：  </p>
-<pre><code>for(int i=0;i&lt;vector.size();i++)
-    doSomething(vector.get(i));
-</code></pre><p>在调用size和get之间，Vector的长度可能发生了改变，可能抛出ArrayIndexOutOfBoundsException。客户端加锁后：</p>
-<pre><code>synchronized(vector){
-    for(int i=0;i&lt;vector.size();i++)
-        doSomething(vector.get(i));
-}
-</code></pre><h2 id="迭代器的fail-fast机制"><a href="#迭代器的fail-fast机制" class="headerlink" title="迭代器的fail-fast机制"></a><strong>迭代器的fail-fast机制</strong></h2><p>同步容器类进行迭代的标准方式是使用Iterator。如果当它发现容器在迭代过程中被修改，将抛出ConcurrentModificationException异常。这就是fail-fast（及时失败）机制。<br>虽然可以在迭代过程中对容器加锁来解决并发问题，但是会导致死锁、降低吞吐量和CPU利用率等问题。还有一种克隆容器方法，在容器很大时，将带来一定的性能开销。</p>
-<h2 id="ConcurrentHashMap"><a href="#ConcurrentHashMap" class="headerlink" title="ConcurrentHashMap"></a><strong>ConcurrentHashMap</strong></h2><p>ConcurrentHashMap和HashMap一样，也是基于散列的Map，使用一种粒度更细的加锁机制——分段锁（lock striping）来实现更大程度的共享：任意数量的读取线程可以并发访问Map，读取线程和写入线程可以并发访问Map，一定数量的写入线程可以并发修改Map。在并发访问环境下将实现更高的吞吐量，在单线程环境下只损失非常小的性能。  </p>
-<p>1.设计思路<br>ConcurrentHashMap内部使用Segment数组，类似于HashMap（JDK7与JDK8中HashMap的实现）的结构，即内部拥有一个Entry数组，数组中的每个元素又是一个链表；同时又是一个ReentrantLock（Segment继承了ReentrantLock）。ConcurrentHashMap中的HashEntry相对于HashMap中的Entry有一定的差异性：HashEntry中的value以及next都被volatile修饰，这样在多线程读写过程中能够保持它们的可见性，代码如下：</p>
-<pre><code>static final class HashEntry&lt;K,V&gt; {
-    final int hash;
-    final K key;
-    volatile V value;
-    volatile HashEntry&lt;K,V&gt; next;
-}
-</code></pre><p>2.Unsafe与CAS<br>在ConcurrentHashMap中，随处可以看到U, 大量使用了U.compareAndSwapXXX的方法，这个方法是利用一个CAS算法实现无锁化的修改值的操作，他可以大大降低锁代理的性能消耗。这个算法的基本思想就是不断地去比较当前内存中的变量值与你指定的一个变量值是否相等，如果相等，则接受你指定的修改的值，否则拒绝你的操作。因为当前线程中的值已经不是最新的值，你的修改很可能会覆盖掉其他线程修改的结果。这一点与乐观锁，SVN的思想是比较类似的。</p>
-
+        
       
 
       
@@ -196,17 +174,6 @@
     <div class="article-info article-info-index">
       
       
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">concurrency</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
       
 
       
@@ -257,7 +224,7 @@
     <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
     <p>扫一扫，分享到微信</p>
     <div class="wx-qrcode">
-      <img src="http://s.jiathis.com/qrcode.php?url=http://yoursite.com/2017/09/01/基础构建模块/" alt="微信分享二维码">
+      <img src="http://s.jiathis.com/qrcode.php?url=http://yoursite.com/2017/09/03/进程与线程/" alt="微信分享二维码">
     </div>
 </div>
 
@@ -271,18 +238,18 @@
   
 <nav id="article-nav">
   
-    <a href="/2017/09/01/HashMap/" id="article-nav-newer" class="article-nav-link-wrap">
+    <a href="/2017/09/03/快排/" id="article-nav-newer" class="article-nav-link-wrap">
       <i class="icon-circle-left"></i>
       <div class="article-nav-title">
         
-          HashMap
+          快排
         
       </div>
     </a>
   
   
-    <a href="/2017/08/31/spring的AOP/" id="article-nav-older" class="article-nav-link-wrap">
-      <div class="article-nav-title">Spring的AOP</div>
+    <a href="/2017/09/03/堆排序/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">堆排序</div>
       <i class="icon-circle-right"></i>
     </a>
   
