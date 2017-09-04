@@ -6,14 +6,19 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="http://yoursite.com">
-  <title>Tag: sort | lavi&#39;s Blog</title>
+  <title>非阻塞I/O | lavi&#39;s Blog</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta property="og:type" content="website">
-<meta property="og:title" content="lavi&#39;s Blog">
-<meta property="og:url" content="http://yoursite.com/tags/sort/index.html">
+  <meta name="description" content="在非阻塞I/O（NIO）之前，Java是通过传统的Socket来实现基本的网络通信功能，这种方式容易造成阻塞，当要处理多个连接时，需要采用多线程方式，由于每个线程都拥有自己的栈空间，由于阻塞会出现大量线程进行上下文切换，使得程序的运行效率降低，因此JDK1.4引入了java.nio.*。NIO非阻塞的实现主要采用了Reactor（反应器）模式，用来处理多个事件源。 I/O多路复用目前支持I/O多路">
+<meta name="keywords" content="java">
+<meta property="og:type" content="article">
+<meta property="og:title" content="非阻塞I&#x2F;O">
+<meta property="og:url" content="http://yoursite.com/2017/09/04/非阻塞I-O/index.html">
 <meta property="og:site_name" content="lavi&#39;s Blog">
+<meta property="og:description" content="在非阻塞I/O（NIO）之前，Java是通过传统的Socket来实现基本的网络通信功能，这种方式容易造成阻塞，当要处理多个连接时，需要采用多线程方式，由于每个线程都拥有自己的栈空间，由于阻塞会出现大量线程进行上下文切换，使得程序的运行效率降低，因此JDK1.4引入了java.nio.*。NIO非阻塞的实现主要采用了Reactor（反应器）模式，用来处理多个事件源。 I/O多路复用目前支持I/O多路">
+<meta property="og:updated_time" content="2017-09-04T07:22:47.654Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="lavi&#39;s Blog">
+<meta name="twitter:title" content="非阻塞I&#x2F;O">
+<meta name="twitter:description" content="在非阻塞I/O（NIO）之前，Java是通过传统的Socket来实现基本的网络通信功能，这种方式容易造成阻塞，当要处理多个连接时，需要采用多线程方式，由于每个线程都拥有自己的栈空间，由于阻塞会出现大量线程进行上下文切换，使得程序的运行效率降低，因此JDK1.4引入了java.nio.*。NIO非阻塞的实现主要采用了Reactor（反应器）模式，用来处理多个事件源。 I/O多路复用目前支持I/O多路">
   
     <link rel="alternative" href="/atom.xml" title="lavi&#39;s Blog" type="application/atom+xml">
   
@@ -145,106 +150,180 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            
-  
-  
+            <article id="post-非阻塞I-O" class="article article-type-post " itemscope itemprop="blogPost">
+  <div class="article-inner">
     
-    
-      
-      
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/archives/2017" class="archive-year">2017</a>
-        </div>
-        <div class="archives">
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2017/09/03/快排/" class="archive-article-date">
-  	<time datetime="2017-09-03T09:58:54.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-09-03</time>
-</a>
-        </div>
-    	 
+      <header class="article-header">
+        
   
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2017/09/03/快排/">快排</a>
+    <h1 class="article-title" itemprop="name">
+      非阻塞I/O
     </h1>
   
 
-        <div class="article-info info-on-right">
-          
+        
+        <a href="/2017/09/04/非阻塞I-O/" class="archive-article-date">
+  	<time datetime="2017-09-04T06:29:01.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-09-04</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>在非阻塞I/O（NIO）之前，Java是通过传统的Socket来实现基本的网络通信功能，这种方式容易造成阻塞，当要处理多个连接时，需要采用多线程方式，由于每个线程都拥有自己的栈空间，由于阻塞会出现大量线程进行上下文切换，使得程序的运行效率降低，因此JDK1.4引入了java.nio.*。<br>NIO非阻塞的实现主要采用了Reactor（反应器）模式，用来处理多个事件源。</p>
+<h2 id="I-O多路复用"><a href="#I-O多路复用" class="headerlink" title="I/O多路复用"></a><strong>I/O多路复用</strong></h2><p>目前支持I/O多路复用的系统调用有 select，pselect，poll，epoll，I/O多路复用就是通过一种机制，一个进程可以监视多个描述符，一旦某个描述符就绪（一般是读就绪或者写就绪），能够通知程序进行相应的读写操作。但select，pselect，poll，epoll本质上都是同步I/O，因为他们都需要在读写事件就绪后自己负责进行读写，也就是说这个读写过程是阻塞的，而异步I/O则无需自己负责进行读写，异步I/O的实现会负责把数据从内核拷贝到用户空间。  </p>
+<p>与多进程和多线程技术相比，I/O多路复用技术的最大优势是系统开销小，系统不必创建进程/线程，也不必维护这些进程/线程，从而大大减小了系统的开销。</p>
+<h2 id="select"><a href="#select" class="headerlink" title="select"></a><strong>select</strong></h2><p>基本原理：select 函数监视的文件描述符分3类，分别是writefds、readfds、和exceptfds。调用后select函数会阻塞，直到有描述符就绪（有数据 可读、可写、或者有except），或者超时（timeout指定等待时间，如果立即返回设为null即可），函数返回。当select函数返回后，可以通过遍历fdset，来找到就绪的描述符。</p>
+<pre><code>#include &lt;sys/select.h&gt;
+#include &lt;sys/time.h&gt;
+
+int select(int maxfdp1,fd_set *readset,fd_set *writeset,fd_set *exceptset,const struct timeval *timeout)
+返回值：就绪描述符的数目，超时返回0，出错返回-1
+</code></pre><p>select本质上是通过设置或者检查存放fd标志位的数据结构来进行下一步处理。这样所带来的缺点是： </p>
+<ul>
+<li><p>select最大的缺陷就是单个进程所打开的FD是有一定限制的，它由FD_SETSIZE设置，默认值是1024。<br>*<br>一般来说这个数目和系统内存关系很大，具体数目可以cat /proc/sys/fs/file-max察看。32位机默认是1024个。64位机默认是2048.</p>
+</li>
+<li><p>对socket进行扫描时是线性扫描，即采用轮询的方法，效率较低。<br>当套接字比较多的时候，每次select()都要通过遍历FD_SETSIZE个Socket来完成调度，不管哪个Socket是活跃的，都遍历一遍。这会浪费很多CPU时间。如果能给套接字注册某个回调函数，当他们活跃时，自动完成相关操作，那就避免了轮询，这正是epoll与kqueue做的。</p>
+</li>
+<li><p>需要维护一个用来存放大量fd的数据结构，这样会使得用户空间和内核空间在传递该结构时复制开销大。</p>
+</li>
+</ul>
+<h2 id="poll"><a href="#poll" class="headerlink" title="poll"></a><strong>poll</strong></h2><p>基本原理：<br>poll本质上和select没有区别，它将用户传入的数组拷贝到内核空间，然后查询每个fd对应的设备状态，如果设备就绪则在设备等待队列中加入一项并继续遍历，如果遍历完所有fd后没有发现就绪设备，则挂起当前进程，直到设备就绪或者主动超时，被唤醒后它又要再次遍历fd。这个过程经历了多次无谓的遍历。基于链表来存储，没有最大连接数的限制。</p>
+<p>缺点：  </p>
+<ul>
+<li>大量的fd的数组被整体复制于用户态和内核地址空间之间，而不管这样的复制是不是有意义。</li>
+<li>select和poll都需要在返回后，通过遍历文件描述符来获取已经就绪的socket。事实上，同时连接的大量客户端在一时刻可能只有很少的处于就绪状态，因此随着监视的描述符数量的增长，其效率也会线性下降。</li>
+</ul>
+<h2 id="epoll"><a href="#epoll" class="headerlink" title="epoll"></a><strong>epoll</strong></h2><p>epoll是在2.6内核中提出的，是之前的select和poll的增强版本。相对于select和poll来说，epoll更加灵活，没有描述符限制。epoll使用一个文件描述符管理多个描述符，将用户关心的文件描述符的事件存放到内核的一个事件表中，这样在用户空间和内核空间的copy只需一次。</p>
+<p>基本原理：<br>epoll支持水平触发和边缘触发，最大的特点在于边缘触发，它只告诉进程哪些fd刚刚变为就绪态，并且只会通知一次。还有一个特点是，epoll使用“事件”的就绪通知方式，通过epoll_ctl注册fd，一旦该fd就绪，内核就会采用类似callback的回调机制来激活该fd，epoll_wait便可以收到通知。</p>
+<p>epoll的优点：  </p>
+<ul>
+<li>没有最大并发连接的限制，能打开的FD的上限远大于1024（1G的内存上能监听约10万个端口）。</li>
+<li>效率提升，不是轮询的方式，不会随着FD数目的增加效率下降。<br>只有活跃可用的FD才会调用callback函数；即Epoll最大的优点就在于它只管你“活跃”的连接，而跟连接总数无关，因此在实际的网络环境中，Epoll的效率就会远远高于select和poll。</li>
+<li>内存拷贝，利用mmap()文件映射内存加速与内核空间的消息传递；即epoll使用mmap减少复制开销。</li>
+</ul>
+<p>综上，在选择select，poll，epoll时要根据具体的使用场合以及这三种方式的自身特点：</p>
+<ul>
+<li>表面上看epoll的性能最好，但是在连接数少并且连接都十分活跃的情况下，select和poll的性能可能比epoll好，毕竟epoll的通知机制需要很多函数回调。</li>
+<li>select低效是因为每次它都需要轮询。但低效也是相对的，视情况而定，也可通过良好的设计改善。</li>
+</ul>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
 	<div class="article-tag tagcloud">
 		<i class="icon-price-tags icon"></i>
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">algorithm</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">sort</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">java</a>
         		</li>
       		
 		</ul>
 	</div>
 
-          
+      
 
+      
+
+      
+        
+<div class="share-btn share-icons tooltip-left">
+  <div class="tooltip tooltip-east">
+    <span class="tooltip-item">
+      <a href="javascript:;" class="share-sns share-outer">
+        <i class="icon icon-share"></i>
+      </a>
+    </span>
+    <span class="tooltip-content">
+      <div class="share-wrap">
+        <div class="share-icons">
+          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
+            <i class="icon icon-weibo"></i>
+          </a>
+          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
+            <i class="icon icon-weixin"></i>
+          </a>
+          <a class="qq share-sns" href="javascript:;" data-type="qq">
+            <i class="icon icon-qq"></i>
+          </a>
+          <a class="douban share-sns" href="javascript:;" data-type="douban">
+            <i class="icon icon-douban"></i>
+          </a>
+          <a class="qzone share-sns" href="javascript:;" data-type="qzone">
+            <i class="icon icon-qzone"></i>
+          </a>
+          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
+            <i class="icon icon-facebook"></i>
+          </a>
+          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
+            <i class="icon icon-twitter"></i>
+          </a>
+          <a class="google share-sns" href="javascript:;" data-type="google">
+            <i class="icon icon-google"></i>
+          </a>
         </div>
-        <div class="clearfix"></div>
-    </header>
+      </div>
+    </span>
+  </div>
+</div>
+
+<div class="page-modal wx-share js-wx-box">
+    <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <div class="wx-qrcode">
+      <img src="http://s.jiathis.com/qrcode.php?url=http://yoursite.com/2017/09/04/非阻塞I-O/" alt="微信分享二维码">
+    </div>
+</div>
+
+<div class="mask js-mask"></div>
+      
+      <div class="clearfix"></div>
+    </div>
   </div>
 </article>
+
   
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2017/09/03/堆排序/" class="archive-article-date">
-  	<time datetime="2017-09-03T02:10:23.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-09-03</time>
-</a>
+<nav id="article-nav">
+  
+  
+    <a href="/2017/09/04/找工作相关java/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">找工作相关java</div>
+      <i class="icon-circle-right"></i>
+    </a>
+  
+</nav>
+
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
         </div>
-    	 
+        
+        
+    </div>
+</aside>
+
+
+
   
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2017/09/03/堆排序/">堆排序</a>
-    </h1>
+  
   
 
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">algorithm</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">sort</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-  
-    </div></section>
   
 
-    
+  
 
 
           </div>
@@ -267,9 +346,9 @@
 	var yiliaConfig = {
 		mathjax: false,
 		isHome: false,
-		isPost: false,
+		isPost: true,
 		isArchive: false,
-		isTag: true,
+		isTag: false,
 		isCategory: false,
 		open_in_new: false,
 		toc_hide_index: true,

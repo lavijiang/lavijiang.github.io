@@ -6,14 +6,19 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="http://yoursite.com">
-  <title>Tag: sort | lavi&#39;s Blog</title>
+  <title>进程间通信 | lavi&#39;s Blog</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta property="og:type" content="website">
-<meta property="og:title" content="lavi&#39;s Blog">
-<meta property="og:url" content="http://yoursite.com/tags/sort/index.html">
+  <meta name="description" content="经典IPC：管道、FIFO、消息队列、信号量以及共享存储。   管道局限性：  半双工：数据单方向流动 管道只能在具有公共祖先的进程间使用命名管道（FIFO）   不需要进程有公共祖先 临界区定义：访问共用资源的程序片段，这些共用资源无法同时被多个线程访问。   调度原则：    任何两个进程不能同时处于临界区   进入临界区的进程要在有限时间内退出   如果进程不能进入自己的临界区，则应让出CP">
+<meta name="keywords" content="os">
+<meta property="og:type" content="article">
+<meta property="og:title" content="进程间通信">
+<meta property="og:url" content="http://yoursite.com/2017/09/03/进程间通信/index.html">
 <meta property="og:site_name" content="lavi&#39;s Blog">
+<meta property="og:description" content="经典IPC：管道、FIFO、消息队列、信号量以及共享存储。   管道局限性：  半双工：数据单方向流动 管道只能在具有公共祖先的进程间使用命名管道（FIFO）   不需要进程有公共祖先 临界区定义：访问共用资源的程序片段，这些共用资源无法同时被多个线程访问。   调度原则：    任何两个进程不能同时处于临界区   进入临界区的进程要在有限时间内退出   如果进程不能进入自己的临界区，则应让出CP">
+<meta property="og:updated_time" content="2017-09-04T02:36:46.032Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="lavi&#39;s Blog">
+<meta name="twitter:title" content="进程间通信">
+<meta name="twitter:description" content="经典IPC：管道、FIFO、消息队列、信号量以及共享存储。   管道局限性：  半双工：数据单方向流动 管道只能在具有公共祖先的进程间使用命名管道（FIFO）   不需要进程有公共祖先 临界区定义：访问共用资源的程序片段，这些共用资源无法同时被多个线程访问。   调度原则：    任何两个进程不能同时处于临界区   进入临界区的进程要在有限时间内退出   如果进程不能进入自己的临界区，则应让出CP">
   
     <link rel="alternative" href="/atom.xml" title="lavi&#39;s Blog" type="application/atom+xml">
   
@@ -145,106 +150,167 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            
-  
-  
+            <article id="post-进程间通信" class="article article-type-post " itemscope itemprop="blogPost">
+  <div class="article-inner">
     
-    
-      
-      
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/archives/2017" class="archive-year">2017</a>
-        </div>
-        <div class="archives">
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2017/09/03/快排/" class="archive-article-date">
-  	<time datetime="2017-09-03T09:58:54.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-09-03</time>
-</a>
-        </div>
-    	 
+      <header class="article-header">
+        
   
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2017/09/03/快排/">快排</a>
+    <h1 class="article-title" itemprop="name">
+      进程间通信
     </h1>
   
 
-        <div class="article-info info-on-right">
-          
+        
+        <a href="/2017/09/03/进程间通信/" class="archive-article-date">
+  	<time datetime="2017-09-03T12:29:10.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-09-03</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>经典IPC：管道、FIFO、消息队列、信号量以及共享存储。  </p>
+<h2 id="管道"><a href="#管道" class="headerlink" title="管道"></a><strong>管道</strong></h2><p>局限性：</p>
+<ul>
+<li>半双工：数据单方向流动</li>
+<li>管道只能在具有公共祖先的进程间使用<br><strong>命名管道（FIFO）</strong></li>
+</ul>
+<hr>
+<p>不需要进程有公共祖先</p>
+<h2 id="临界区"><a href="#临界区" class="headerlink" title="临界区"></a><strong>临界区</strong></h2><p>定义：访问共用资源的程序片段，这些共用资源无法同时被多个线程访问。  </p>
+<p>调度原则：  </p>
+<ol>
+<li>任何两个进程不能同时处于临界区  </li>
+<li>进入临界区的进程要在有限时间内退出  </li>
+<li>如果进程不能进入自己的临界区，则应让出CPU</li>
+</ol>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
 	<div class="article-tag tagcloud">
 		<i class="icon-price-tags icon"></i>
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">algorithm</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">sort</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">os</a>
         		</li>
       		
 		</ul>
 	</div>
 
-          
+      
 
+      
+
+      
+        
+<div class="share-btn share-icons tooltip-left">
+  <div class="tooltip tooltip-east">
+    <span class="tooltip-item">
+      <a href="javascript:;" class="share-sns share-outer">
+        <i class="icon icon-share"></i>
+      </a>
+    </span>
+    <span class="tooltip-content">
+      <div class="share-wrap">
+        <div class="share-icons">
+          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
+            <i class="icon icon-weibo"></i>
+          </a>
+          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
+            <i class="icon icon-weixin"></i>
+          </a>
+          <a class="qq share-sns" href="javascript:;" data-type="qq">
+            <i class="icon icon-qq"></i>
+          </a>
+          <a class="douban share-sns" href="javascript:;" data-type="douban">
+            <i class="icon icon-douban"></i>
+          </a>
+          <a class="qzone share-sns" href="javascript:;" data-type="qzone">
+            <i class="icon icon-qzone"></i>
+          </a>
+          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
+            <i class="icon icon-facebook"></i>
+          </a>
+          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
+            <i class="icon icon-twitter"></i>
+          </a>
+          <a class="google share-sns" href="javascript:;" data-type="google">
+            <i class="icon icon-google"></i>
+          </a>
         </div>
-        <div class="clearfix"></div>
-    </header>
+      </div>
+    </span>
+  </div>
+</div>
+
+<div class="page-modal wx-share js-wx-box">
+    <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <div class="wx-qrcode">
+      <img src="http://s.jiathis.com/qrcode.php?url=http://yoursite.com/2017/09/03/进程间通信/" alt="微信分享二维码">
+    </div>
+</div>
+
+<div class="mask js-mask"></div>
+      
+      <div class="clearfix"></div>
+    </div>
   </div>
 </article>
+
   
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2017/09/03/堆排序/" class="archive-article-date">
-  	<time datetime="2017-09-03T02:10:23.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-09-03</time>
-</a>
+<nav id="article-nav">
+  
+    <a href="/2017/09/04/单例模式/" id="article-nav-newer" class="article-nav-link-wrap">
+      <i class="icon-circle-left"></i>
+      <div class="article-nav-title">
+        
+          单例模式
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2017/09/03/快排/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">快排</div>
+      <i class="icon-circle-right"></i>
+    </a>
+  
+</nav>
+
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
         </div>
-    	 
+        
+        
+    </div>
+</aside>
+
+
+
   
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2017/09/03/堆排序/">堆排序</a>
-    </h1>
+  
   
 
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">algorithm</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">sort</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-  
-    </div></section>
   
 
-    
+  
 
 
           </div>
@@ -267,9 +333,9 @@
 	var yiliaConfig = {
 		mathjax: false,
 		isHome: false,
-		isPost: false,
+		isPost: true,
 		isArchive: false,
-		isTag: true,
+		isTag: false,
 		isCategory: false,
 		open_in_new: false,
 		toc_hide_index: true,
