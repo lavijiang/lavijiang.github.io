@@ -147,6 +147,181 @@
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-HashMap" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2017/09/01/HashMap/">HashMap</a>
+    </h1>
+  
+
+        
+        <a href="/2017/09/01/HashMap/" class="archive-article-date">
+  	<time datetime="2017-09-01T15:19:18.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-09-01</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="数组与链表"><a href="#数组与链表" class="headerlink" title="数组与链表"></a><strong>数组与链表</strong></h2><p>数组存储区间是连续的，占用内存严重。但数组的二分查找时间复杂度小，为O(logN)；数组的特点是：寻址容易，插入和删除困难；<br>链表存储区间离散，占用内存比较宽松，故空间复杂度很小，但查找的时间复杂度很大。链表的特点是：寻址困难，插入和删除容易。<br>哈希表综合两者的特性，做出一种寻址容易，插入删除也容易的数据结构。哈希表既满足了数据的查找方便，同时不占用太多的内容空间，使用也十分方便。</p>
+<h2 id="HashMap"><a href="#HashMap" class="headerlink" title="HashMap"></a><strong>HashMap</strong></h2><p>HashMap结构为链表数组，如下图：<br><img src="/img/HashMap1.jpg" alt="HashMap"><br><img src="/img/HashMap2.jpg" alt="HashMap"><br>哈希表是由数组+链表组成的，一个长度为16的数组中，每个元素存储的是一个链表的头结点。那么这些元素是按照什么样的规则存储到数组中呢。一般情况是通过hash(key)%len获得，也就是元素的key的哈希值对数组长度取模得到。比如上述哈希表中，12%16=12,28%16=12,108%16=12,140%16=12。所以12、28、108以及140都存储在数组下标为12的位置。<br>这就是使用了散列函数，将一个大的空间映射到一个大小可以接受的索引空间，使用hash function会带来元素碰撞问题：即不同元素映射到了同一位置。解决碰撞问题的方法有：  </p>
+<ol>
+<li>开放定址法（线性探测再散列，二次探测再散列，伪随机探测再散列）</li>
+<li>再哈希法</li>
+<li>链地址法 </li>
+</ol>
+<p>Java中hashmap的解决办法就是采用的链地址法。</p>
+<p>//HashMap Entry数组的初始大小，必须是2的幂<br>static final int DEFAULT_INITIAL_CAPACITY = 1&lt;&lt;4;//aka 16<br>在C++STL中以质数来设计表的大小，确保散列能够均匀分布，如果为非质数，很可能导致散列集中在几个数上。</p>
+<p>//当创建 HashMap 时，有一个默认的负载因子（load factor），其默认值为 0.75，这是时间和空间成本上一种折衷：增大负载因子可以减少 Hash 表（就是那个 Entry 数组）所占用的内存空间，但会增加查询数据的时间开销，而查询是最频繁的的操作（HashMap 的 get() 与 put() 方法都要用到查询）；减小负载因子会提高数据查询的性能，但会增加 Hash 表所占用的内存空间。<br>static final float DEFAULT_LOAD_FACTOR = 0.75f;</p>
+<p>HashMap的key和value都可以是null。</p>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">java</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2017/09/01/HashMap/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-基础构建模块" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2017/09/01/基础构建模块/">基础构建模块</a>
+    </h1>
+  
+
+        
+        <a href="/2017/09/01/基础构建模块/" class="archive-article-date">
+  	<time datetime="2017-09-01T01:54:57.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-09-01</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="Synchronized-Collections-同步容器类"><a href="#Synchronized-Collections-同步容器类" class="headerlink" title="Synchronized Collections(同步容器类)"></a><strong>Synchronized Collections(同步容器类)</strong></h2><p>同步容器类包括了Vector和Hashtable，是早期JDK的一部分，另外在JDK1.2引入了同步封装类，采用了Collections.synchronizedXxx等工厂方法。将它们的状态封装，并对每个公有方法进行同步。<br>线程安全问题：<br>同步容器虽然线程安全，但是在多线程情况下进行一些符合操作时需要额外的客户端加锁。这种方式可以解决不可靠迭代问题，但是会导致其他线程在迭代期间无法访问它，降低了并发性。例如：  </p>
+<pre><code>for(int i=0;i&lt;vector.size();i++)
+    doSomething(vector.get(i));
+</code></pre><p>在调用size和get之间，Vector的长度可能发生了改变，可能抛出ArrayIndexOutOfBoundsException。客户端加锁后：</p>
+<pre><code>synchronized(vector){
+    for(int i=0;i&lt;vector.size();i++)
+        doSomething(vector.get(i));
+}
+</code></pre><h2 id="迭代器的fail-fast机制"><a href="#迭代器的fail-fast机制" class="headerlink" title="迭代器的fail-fast机制"></a><strong>迭代器的fail-fast机制</strong></h2><p>同步容器类进行迭代的标准方式是使用Iterator。如果当它发现容器在迭代过程中被修改，将抛出ConcurrentModificationException异常。这就是fail-fast（及时失败）机制。<br>虽然可以在迭代过程中对容器加锁来解决并发问题，但是会导致死锁、降低吞吐量和CPU利用率等问题。还有一种克隆容器方法，在容器很大时，将带来一定的性能开销。</p>
+<h2 id="ConcurrentHashMap"><a href="#ConcurrentHashMap" class="headerlink" title="ConcurrentHashMap"></a><strong>ConcurrentHashMap</strong></h2><p>ConcurrentHashMap和HashMap一样，也是基于散列的Map，使用一种粒度更细的加锁机制——分段锁（lock striping）来实现更大程度的共享：任意数量的读取线程可以并发访问Map，读取线程和写入线程可以并发访问Map，一定数量的写入线程可以并发修改Map。在并发访问环境下将实现更高的吞吐量，在单线程环境下只损失非常小的性能。  </p>
+<p>1.设计思路<br>ConcurrentHashMap内部使用Segment数组，类似于HashMap（JDK7与JDK8中HashMap的实现）的结构，即内部拥有一个Entry数组，数组中的每个元素又是一个链表；同时又是一个ReentrantLock（Segment继承了ReentrantLock）。ConcurrentHashMap中的HashEntry相对于HashMap中的Entry有一定的差异性：HashEntry中的value以及next都被volatile修饰，这样在多线程读写过程中能够保持它们的可见性，代码如下：</p>
+<pre><code>static final class HashEntry&lt;K,V&gt; {
+    final int hash;
+    final K key;
+    volatile V value;
+    volatile HashEntry&lt;K,V&gt; next;
+}
+</code></pre><p>2.Unsafe与CAS<br>在ConcurrentHashMap中，随处可以看到U, 大量使用了U.compareAndSwapXXX的方法，这个方法是利用一个CAS算法实现无锁化的修改值的操作，他可以大大降低锁代理的性能消耗。这个算法的基本思想就是不断地去比较当前内存中的变量值与你指定的一个变量值是否相等，如果相等，则接受你指定的修改的值，否则拒绝你的操作。因为当前线程中的值已经不是最新的值，你的修改很可能会覆盖掉其他线程修改的结果。这一点与乐观锁，SVN的思想是比较类似的。</p>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">concurrency</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2017/09/01/基础构建模块/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-spring的AOP" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -973,160 +1148,9 @@ struct __attribute__ ((__packed__)) sdshdr64 {
 
 
   
-    <article id="post-线程安全性" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2017/08/27/线程安全性/">线程安全性</a>
-    </h1>
-  
-
-        
-        <a href="/2017/08/27/线程安全性/" class="archive-article-date">
-  	<time datetime="2017-08-27T07:50:58.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-08-27</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>线程安全的代码核心在于对<strong>共享(Shared)</strong>和<strong>可变(Mutable)</strong>状态的访问</p>
-<p>共享：变量可以被多个线程同时访问<br>可变：变量的值在生命周期内可以发生变化</p>
-<h2 id="线程安全的定义"><a href="#线程安全的定义" class="headerlink" title="线程安全的定义"></a><strong>线程安全的定义</strong></h2><p>当多个线程访问某个类，不管运行时环境采用何种调度方式或者这些线程如何交替执行，并且在主调代码中不需要额外的同步或协同，这个类都能表现正确的行为。</p>
-<p><em>无状态对象一定线程安全</em></p>
-<h2 id="原子性-atomic"><a href="#原子性-atomic" class="headerlink" title="原子性(atomic)"></a><strong>原子性(atomic)</strong></h2><p>竞态条件</p>
-<h2 id="加锁机制"><a href="#加锁机制" class="headerlink" title="加锁机制"></a><strong>加锁机制</strong></h2><p><strong>内置锁(同步锁、互斥锁)</strong>：java提供同步代码块(Synchronized Block)支持原子性，包括锁的对象引用和锁保护的代码块，性能低。<br>&gt;<br>    synchronized(lock){<br>    }</p>
-<p><strong>重入</strong>：内置锁可重入，即线程可以获得它自己持有的锁。实现方法是为每个锁关联一个获取计数值和一个所有者线程。  </p>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">concurrency</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2017/08/27/线程安全性/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-hello-world" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2017/08/27/hello-world/">Hello World</a>
-    </h1>
-  
-
-        
-        <a href="/2017/08/27/hello-world/" class="archive-article-date">
-  	<time datetime="2017-08-27T07:02:46.436Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-08-27</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>Welcome to <a href="https://hexo.io/" target="_blank" rel="external">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/" target="_blank" rel="external">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html" target="_blank" rel="external">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues" target="_blank" rel="external">GitHub</a>.</p>
-<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ hexo new <span class="string">"My New Post"</span></div></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/writing.html" target="_blank" rel="external">Writing</a></p>
-<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ hexo server</div></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/server.html" target="_blank" rel="external">Server</a></p>
-<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ hexo generate</div></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/generating.html" target="_blank" rel="external">Generating</a></p>
-<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ hexo deploy</div></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/deployment.html" target="_blank" rel="external">Deployment</a></p>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2017/08/27/hello-world/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
   
     <nav id="page-nav">
-      <a class="extend prev" rel="prev" href="/">&laquo; Prev</a><a class="page-number" href="/">1</a><span class="page-number current">2</span>
+      <a class="extend prev" rel="prev" href="/">&laquo; Prev</a><a class="page-number" href="/">1</a><span class="page-number current">2</span><a class="page-number" href="/page/3/">3</a><a class="extend next" rel="next" href="/page/3/">Next &raquo;</a>
     </nav>
   
 
@@ -1138,7 +1162,7 @@ struct __attribute__ ((__packed__)) sdshdr64 {
   <div class="outer">
     <div id="footer-info">
     	<div class="footer-left">
-    		&copy; 2017 lavijiang
+    		&copy; 2018 lavijiang
     	</div>
       	<div class="footer-right">
       		<a href="http://hexo.io/" target="_blank">Hexo</a>  Theme <a href="https://github.com/litten/hexo-theme-yilia" target="_blank">Yilia</a> by Litten
@@ -1213,10 +1237,6 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
           <ul class="article-tag-list" q-show="showTags">
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">java</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">Spring</a>
               </li>
              
@@ -1229,15 +1249,19 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">concurrency</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">java</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">algorithm</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">sort</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">concurrency</a>
               </li>
              
               <li class="article-tag-list-item">
