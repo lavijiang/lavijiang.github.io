@@ -8,17 +8,17 @@
   <link rel="dns-prefetch" href="http://yoursite.com">
   <title>算法关于素数 | lavi&#39;s Blog</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="算法中关于素数的处理思想：先求出素数表，再判断，C++代码如下： 1234567891011121314151617181920#include &amp;lt;iostream&amp;gt;#define rep(i,n)  for(int i=0; i&amp;lt;n; i++)#define N 100000#define ROOT_N 317using namespace std;bool is_prime[">
+  <meta name="description" content="算法中关于素数的处理思想：先求出素数表，再判断，求素数表C++代码如下： 1234567891011121314151617181920#include &amp;lt;iostream&amp;gt;#define rep(i,n)  for(int i=0; i&amp;lt;n; i++)#define N 100000#define ROOT_N 317using namespace std;bool is_pr">
 <meta name="keywords" content="algorithm">
 <meta property="og:type" content="article">
 <meta property="og:title" content="算法关于素数">
 <meta property="og:url" content="http://yoursite.com/2018/01/09/算法关于素数/index.html">
 <meta property="og:site_name" content="lavi&#39;s Blog">
-<meta property="og:description" content="算法中关于素数的处理思想：先求出素数表，再判断，C++代码如下： 1234567891011121314151617181920#include &amp;lt;iostream&amp;gt;#define rep(i,n)  for(int i=0; i&amp;lt;n; i++)#define N 100000#define ROOT_N 317using namespace std;bool is_prime[">
-<meta property="og:updated_time" content="2018-01-09T08:27:28.576Z">
+<meta property="og:description" content="算法中关于素数的处理思想：先求出素数表，再判断，求素数表C++代码如下： 1234567891011121314151617181920#include &amp;lt;iostream&amp;gt;#define rep(i,n)  for(int i=0; i&amp;lt;n; i++)#define N 100000#define ROOT_N 317using namespace std;bool is_pr">
+<meta property="og:updated_time" content="2018-01-09T08:32:12.625Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="算法关于素数">
-<meta name="twitter:description" content="算法中关于素数的处理思想：先求出素数表，再判断，C++代码如下： 1234567891011121314151617181920#include &amp;lt;iostream&amp;gt;#define rep(i,n)  for(int i=0; i&amp;lt;n; i++)#define N 100000#define ROOT_N 317using namespace std;bool is_prime[">
+<meta name="twitter:description" content="算法中关于素数的处理思想：先求出素数表，再判断，求素数表C++代码如下： 1234567891011121314151617181920#include &amp;lt;iostream&amp;gt;#define rep(i,n)  for(int i=0; i&amp;lt;n; i++)#define N 100000#define ROOT_N 317using namespace std;bool is_pr">
   
     <link rel="alternative" href="/atom.xml" title="lavi&#39;s Blog" type="application/atom+xml">
   
@@ -170,7 +170,7 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p><strong>算法中关于素数的处理</strong><br>思想：先求出素数表，再判断，C++代码如下：</p>
+        <p><strong>算法中关于素数的处理</strong><br>思想：先求出素数表，再判断，求素数表C++代码如下：</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div></pre></td><td class="code"><pre><div class="line">#include &lt;iostream&gt;</div><div class="line">#define rep(i,n)  for(int i=0; i&lt;n; i++)</div><div class="line">#define N 100000</div><div class="line">#define ROOT_N 317</div><div class="line">using namespace std;</div><div class="line"></div><div class="line">bool is_prime[N+1];</div><div class="line"></div><div class="line">void sieve()&#123;</div><div class="line">    rep(i, N) is_prime[i] = true;</div><div class="line">    is_prime[1] = false;</div><div class="line">    for(int i = 2; i &lt;= ROOT_N; i++)&#123;</div><div class="line">        if(not is_prime[i]) continue;</div><div class="line">        int j = i + i;</div><div class="line">        while(j &lt;= N)&#123;</div><div class="line">            is_prime[j] = false;</div><div class="line">            j += i;</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
       
 
@@ -253,6 +253,15 @@
 
   
 <nav id="article-nav">
+  
+    <a href="/2018/01/10/atcoder-regular-088/" id="article-nav-newer" class="article-nav-link-wrap">
+      <i class="icon-circle-left"></i>
+      <div class="article-nav-title">
+        
+          atcoder regular 088
+        
+      </div>
+    </a>
   
   
     <a href="/2017/09/04/Struts/" id="article-nav-older" class="article-nav-link-wrap">
@@ -372,15 +381,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
           <ul class="article-tag-list" q-show="showTags">
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">java</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">Spring</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">设计模式</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">redis</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -388,7 +393,7 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">java</a>
+                <a href="javascript:void(0)" class="js-tag color1">redis</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -397,6 +402,10 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">sort</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">设计模式</a>
               </li>
              
               <li class="article-tag-list-item">
